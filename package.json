@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "graphql-request": "^6.1.0",
+    "handlebars": "^4.7.7"
+  }
+}
