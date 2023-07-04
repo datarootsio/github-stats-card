@@ -1,7 +1,6 @@
 // use dotenv file
 require('dotenv').config();
 
-// create a function that queries the github graphql api for the user's stats
 const { GraphQLClient } = require('graphql-request');
 const GITHUB_API_URL = "https://api.github.com/graphql"
 
@@ -88,7 +87,6 @@ const collectStats = async (username) => {
 
   return stats
 
-
 }
 
-export default collectStats;
+module.exports = collectStats;

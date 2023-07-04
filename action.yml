@@ -1,0 +1,13 @@
+name: 'Hello World'
+description: 'Greet someone and record the time'
+inputs:
+  username: 
+    description: 'username to get stats for'
+    required: true
+    default: 'bart6114'
+outputs:
+  time: # id of output
+    description: 'The time we greeted you'
+runs:
+  using: 'node18'
+  main: 'index.js'

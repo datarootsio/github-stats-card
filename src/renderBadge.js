@@ -12,4 +12,4 @@ const renderBadge = (params) => {
 }
 
 
-export default renderBadge;
+module.exports = renderBadge;
