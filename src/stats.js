@@ -1,5 +1,5 @@
 // use dotenv file
-require('dotenv').config();
+require('dotenv').config({ path: '../.env' });
 
 const { GraphQLClient } = require('graphql-request');
 const GITHUB_API_URL = "https://api.github.com/graphql"
@@ -15,6 +15,7 @@ const getStats = async (username) => {
   const query = `
     {
         user(login: "${username}") {
+          avatarUrl
           contributionsCollection(from: "2023-01-01T00:00:00") {
             totalCommitContributions
             issueContributions {
@@ -78,11 +79,12 @@ const collectStats = async (username) => {
   const statsUser = await getStats(username);
 
   const stats = {
-    commitContributions: statsUser.user.contributionsCollection.totalCommitContributions,
-    issueContributions: statsUser.user.contributionsCollection.issueContributions.totalCount,
+    avatarUrl: statsUser.user.avatarUrl,
+    commits: statsUser.user.contributionsCollection.totalCommitContributions,
+    issues: statsUser.user.contributionsCollection.issueContributions.totalCount,
     followers: statsUser.user.followers.totalCount,
     stargazerDetails: stargazerDetails,
-    stargazerSum: stargazerDetails.reduce((acc, repo) => acc + repo.stargazerCount, 0)
+    stargazers: stargazerDetails.reduce((acc, repo) => acc + repo.stargazerCount, 0)
   }
 
   return stats

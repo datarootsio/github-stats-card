@@ -5,6 +5,7 @@
     "@svgdotjs/svg.js": "^3.2.0",
     "dotenv": "^16.3.1",
     "graphql-request": "^6.1.0",
-    "handlebars": "^4.7.7"
+    "svg.js": "^2.7.1",
+    "svgdom": "^0.1.14"
   }
 }
