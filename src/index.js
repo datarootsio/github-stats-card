@@ -1,7 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const collectStats = require('./stats');
-const generateSVG = require('./generateSVG');
+const generateSVG = require('./generateSvg');
 
 // try {
 //   const username = core.getInput('username');
