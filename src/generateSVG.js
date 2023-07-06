@@ -1,12 +1,3 @@
-const { createSVGWindow } = require('svgdom')
-const window = createSVGWindow()
-const document = window.document
-const { SVG, registerWindow } = require('@svgdotjs/svg.js')
-
-// register window and document
-registerWindow(window, document)
-
-
 const [w, h] = [400, 250]
 
 const theme = {
