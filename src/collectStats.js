@@ -1,6 +1,3 @@
-// use dotenv file
-require('dotenv').config({ path: '../.env' });
-
 const { GraphQLClient } = require('graphql-request');
 const GITHUB_API_URL = "https://api.github.com/graphql"
 

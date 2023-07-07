@@ -1,4 +1,3 @@
-const [w, h] = [400, 250]
 
 const theme = {
     padding: 10,
@@ -18,7 +17,7 @@ const theme = {
 const svgSafeString = (str) => str.replace("&", "&amp;").replace(">", "&gt;").replace("<", "&lt;")
 
 
-const generateSVG = ({ theme: t, about, username, header, stats: { commits, issues, followers, stargazers, avatarUrl } }) => {
+const generateSVG = ({ theme: t, about, username, header, stats: { commits, followers, stargazers, avatarUrl } }) => {
     if (t == undefined) {
         t = theme
     }
@@ -29,7 +28,7 @@ const generateSVG = ({ theme: t, about, username, header, stats: { commits, issu
 
     const aboutWrap = svgSafeString(about).split("\n").map((line, i) => `<tspan x="0" dy="${i == 0 ? 0 : 20}">${line}</tspan>`).join("")
 
-    svg = `<?xml version="1.0" encoding="utf-8"?>
+    const svg = `<?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: $$$/GeneralStr/196=Adobe Illustrator 27.6.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="layer1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 400 250" style="enable-background:new 0 0 400 250;" xml:space="preserve">
