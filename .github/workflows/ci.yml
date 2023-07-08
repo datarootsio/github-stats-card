@@ -26,13 +26,6 @@ jobs:
         run: npm run prepare
       - name: commit dist to repo
         uses: stefanzweifel/git-auto-commit-action@v4
-  generate-badge:
-    needs: base-ci
-    runs-on: ubuntu-latest
-    env: 
-      GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-    steps:
-      - uses: actions/checkout@v3
       - uses: ./
         name: gh-stats
         with:
