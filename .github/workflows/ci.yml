@@ -36,5 +36,5 @@ jobs:
       - uses: ./
         with:
           username: bart6114
-          gh_token: ${{ secrets.GH_TOKEN }}
+          gh_token: ${{ env.GITHUB_TOKEN }}
           badge_path: assets/badge.svg

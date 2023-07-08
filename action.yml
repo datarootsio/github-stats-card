@@ -17,5 +17,5 @@ outputs:
   badgePath: # id of output
     description: 'Location of generated badge.'
 runs:
-  using: 'node18'
+  using: 'node16'
   main: 'dist/index.js'
