@@ -1,10 +1,14 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'gh-stats'
+description: 'Generate a minimal but inclusive github stats badge'
 inputs:
   username: 
     description: 'username to get stats for'
     required: true
     default: 'bart6114'
+  gh_token: 
+    description: 'github token to use for api calls'
+    required: true
+    default: ${{ secrets.GH_TOKEN }}
 outputs:
   time: # id of output
     description: 'The time we greeted you'
