@@ -1,10 +1,10 @@
-require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
-/******/ 	/* webpack/runtime/compat */
-/******/ 	
-/******/ 	if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = __dirname + "/";
-/******/ 	
+import './sourcemap-register.cjs';/******/ /* webpack/runtime/compat */
+/******/ 
+/******/ if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = new URL('.', import.meta.url).pathname.slice(import.meta.url.match(/^file:\/\/\/\w:/) ? 1 : 0, -1) + "/";
+/******/ 
 /************************************************************************/
 var __webpack_exports__ = {};
+
 // const core = require('@actions/core');
 // const github = require('@actions/github');
 // const collectStats = require('./collectStats');
@@ -21,8 +21,6 @@ var __webpack_exports__ = {};
 // // } catch (error) {
 // //   core.setFailed(error.message);
 // // }
-
-
 // const userName = "bart6114"
 // collectStats(userName).then(stats => generateSvg({
 //   stats, username: userName,
@@ -30,7 +28,4 @@ var __webpack_exports__ = {};
 // })).then(console.log)
 
 
-module.exports = __webpack_exports__;
-/******/ })()
-;
 //# sourceMappingURL=index.js.map
