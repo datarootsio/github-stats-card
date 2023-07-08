@@ -22,6 +22,7 @@ try {
   }
 
   await createCommit(c)
+  core.setOutput('badgePath', badgePath)
 } catch (error) {
   if (error instanceof Error) {
     core.setFailed(error.message)

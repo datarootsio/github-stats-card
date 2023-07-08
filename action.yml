@@ -14,8 +14,8 @@ inputs:
     required: true
     default: 'assets/badge.svg'
 outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  badgePath: # id of output
+    description: 'Location of generated badge.'
 runs:
   using: 'node18'
-  main: 'index.js'
+  main: 'dist/index.js'
