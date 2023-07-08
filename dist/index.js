@@ -33861,7 +33861,8 @@ try {
 }
 catch (error) {
     if (error instanceof Error) {
-        _actions_core__WEBPACK_IMPORTED_MODULE_0___default().setFailed(error.message);
+        console.log(error.message);
+        // core.setFailed(error.message)
     }
 }
 
