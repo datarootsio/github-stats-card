@@ -34,6 +34,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: ./
+        name: gh-stats
         with:
           username: bart6114
           gh_token: ${{ env.GITHUB_TOKEN }}

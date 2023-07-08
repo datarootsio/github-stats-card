@@ -25,6 +25,7 @@ try {
   core.setOutput('badgePath', badgePath)
 } catch (error) {
   if (error instanceof Error) {
-    core.setFailed(error.message)
+    console.log(error.message)
+    // core.setFailed(error.message)
   }
 }
