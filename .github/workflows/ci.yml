@@ -27,7 +27,7 @@ jobs:
       - name: commit dist to repo
         uses: stefanzweifel/git-auto-commit-action@v4
   generate-badge:
-    depends-on: base-ci
+    needs: base-ci
     runs-on: ubuntu-latest
     env: 
       GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
