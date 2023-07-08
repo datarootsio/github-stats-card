@@ -4,9 +4,9 @@ import collectStats from './collectStats'
 import generateSVG from './generateSvg'
 
 try {
-  const username = core.getInput('username')
-  const ghToken = core.getInput('gh_token')
-  const badgePath = core.getInput('badgePath')
+  const username: string = core.getInput('username')
+  const ghToken: string = core.getInput('gh_token')
+  const badgePath: string = core.getInput('badge_path')
 
   const stats = await collectStats({ username })
   const svgContent = generateSVG({
@@ -24,8 +24,5 @@ try {
   await createCommit(c)
   core.setOutput('badgePath', badgePath)
 } catch (error) {
-  if (error instanceof Error) {
-    console.log(error.message)
-    // core.setFailed(error.message)
-  }
+  if (error instanceof Error) core.setFailed(error.message)
 }
