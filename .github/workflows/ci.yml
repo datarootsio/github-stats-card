@@ -1,4 +1,4 @@
-name: Check dist/
+name: ci
 
 on: push
 
@@ -16,6 +16,8 @@ jobs:
           node-version: 18.x
       - name: Install dependencies
         run: npm ci
+      - name: Lint
+        run: npm run lint
       - name: Test
         run: npm test
       - name: Rebuild the dist/ directory
