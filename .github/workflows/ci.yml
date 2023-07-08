@@ -26,3 +26,15 @@ jobs:
         run: npm run prepare
       - name: commit dist to repo
         uses: stefanzweifel/git-auto-commit-action@v4
+  generate-badge:
+    depends-on: base-ci
+    runs-on: ubuntu-latest
+    env: 
+      GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./
+        with:
+          username: bart6114
+          gh_token: ${{ secrets.GH_TOKEN }}
+          badge_path: assets/badge.svg

@@ -1,22 +1,29 @@
-// const core = require('@actions/core');
-// const github = require('@actions/github');
-// const collectStats = require('./collectStats');
-// const generateSvg = require('./generateSvg');
-// const _ = require('./config');
-// // try {
-// //   const username = core.getInput('username');
-// //   console.log(`Hello ${username}!`);
-// //   const time = (new Date()).toTimeString();
-// //   core.setOutput("time", time);
-// //   // Get the JSON webhook payload for the event that triggered the workflow
-// //   const payload = JSON.stringify(github.context.payload, undefined, 2)
-// //   console.log(`The event payload: ${payload}`);
-// // } catch (error) {
-// //   core.setFailed(error.message);
-// // }
+import core from '@actions/core'
+import createCommit, { type CommitOptions } from './createCommit'
+import collectStats from './collectStats'
+import generateSVG from './generateSvg'
 
-// const userName = "bart6114"
-// collectStats(userName).then(stats => generateSvg({
-//   stats, username: userName,
-//   about: "He/him, cheese, dad, data,\nrocks & trails."
-// })).then(console.log)
+try {
+  const username = core.getInput('username')
+  const ghToken = core.getInput('gh_token')
+  const badgePath = core.getInput('badgePath')
+
+  const stats = await collectStats({ username })
+  const svgContent = generateSVG({
+    about: 'He/him, cheese, dad, data,\nrocks & trails.',
+    stats,
+    username
+  })
+
+  const c: CommitOptions = {
+    ghToken,
+    svgContent,
+    badgePath
+  }
+
+  await createCommit(c)
+} catch (error) {
+  if (error instanceof Error) {
+    core.setFailed(error.message)
+  }
+}

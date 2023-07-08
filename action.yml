@@ -9,6 +9,10 @@ inputs:
     description: 'github token to use for api calls'
     required: true
     default: ${{ secrets.GH_TOKEN }}
+  badge_path:
+    description: 'path to save badge to'
+    required: true
+    default: 'assets/badge.svg'
 outputs:
   time: # id of output
     description: 'The time we greeted you'

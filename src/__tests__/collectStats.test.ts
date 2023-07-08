@@ -16,8 +16,6 @@ test('collectStats', async () => {
 
   // expect stargazers to be more than 1000
   expect(stats.stargazers).toBeGreaterThan(1000)
-
-  console.log(stats.stargazers)
 }, 10000)
 
 test('collectStatsWithFilter', async () => {
@@ -36,6 +34,4 @@ test('collectStatsWithFilter', async () => {
 
   // check the override
   expect(stats.stargazerDetails.some(repo => repo.name === 'databooks')).toBeTruthy()
-
-  console.log(stats.stargazers)
 }, 10000)
