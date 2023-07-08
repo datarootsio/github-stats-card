@@ -15,10 +15,8 @@
 // //   core.setFailed(error.message);
 // // }
 
-
 // const userName = "bart6114"
 // collectStats(userName).then(stats => generateSvg({
 //   stats, username: userName,
 //   about: "He/him, cheese, dad, data,\nrocks & trails."
 // })).then(console.log)
-

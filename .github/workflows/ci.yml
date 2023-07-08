@@ -3,7 +3,7 @@ name: ci
 on: push
 
 jobs:
-  build-dist:
+  base-ci:
     runs-on: ubuntu-latest
     permissions:
       # Give the default GITHUB_TOKEN write permission to commit and push the

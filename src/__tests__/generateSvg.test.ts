@@ -5,7 +5,7 @@ import collectStats from '../collectStats'
 import { XMLParser } from 'fast-xml-parser'
 
 test('generateSVG', async () => {
-  const stats = await collectStats('bart6114')
+  const stats = await collectStats({ username: 'bart6114' })
   const svg = generateSvg(
     {
       about: 'He/him, cheese, dad, data,\nrocks & trails.',

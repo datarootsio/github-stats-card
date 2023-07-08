@@ -12,6 +12,12 @@ const client = new GraphQLClient(GITHUB_API_URL, {
   }
 })
 
+interface CollectStatsOptions {
+  username: string
+  excludeRepos?: string[]
+  includeReposOverride?: string[]
+}
+
 interface GHAPIUserStats {
   user: {
     avatarUrl: string
@@ -83,7 +89,7 @@ const getUserStats = async (username: string): Promise<GHAPIUserStats> => {
   return data
 }
 
-const getReposWithStargazers = async (username: string, afterCursor = ''): Promise<GHReposWithStargazers[]> => {
+const getReposWithStargazers = async ({ username, excludeRepos = [], includeReposOverride = [] }: CollectStatsOptions, afterCursor = ''): Promise<GHReposWithStargazers[]> => {
   let repos: GHReposWithStargazers[] = []
   const query = `
     {
@@ -111,16 +117,32 @@ const getReposWithStargazers = async (username: string, afterCursor = ''): Promi
 
   const data: GHAPIStargazers = await client.request(query)
   const endCursor = data.user.repositories.pageInfo.endCursor
-  repos = data.user.repositories.nodes.filter(repo => repo.stargazerCount > 0)
+
   if (endCursor != null) {
-    repos = [...repos, ...await getReposWithStargazers(username, endCursor)]
+    repos = [...data.user.repositories.nodes, ...await getReposWithStargazers({ username, includeReposOverride, excludeRepos }, endCursor)]
   }
-  return repos
+
+  // create regexes from userinput
+  const excludeRegexes = excludeRepos.map(ep => RegExp(ep))
+  const includeRegexes = includeReposOverride.map(ip => RegExp(ip))
+
+  // remove repos that are in excludeRepos
+  const excludedRepos = repos.filter(repo => !excludeRegexes.some(r => r.test(`${repo.owner.login}/${repo.name}`)))
+  const includedReposViaOverride = repos.filter(repo => includeRegexes.some(r => r.test(`${repo.owner.login}/${repo.name}`)))
+
+  // remove 0 star repos
+  let filteredRepos = repos.filter(repo => repo.stargazerCount > 0)
+  // remove excluded repos
+  filteredRepos = filteredRepos.filter(r => excludedRepos.some(er => er.name === r.name && er.owner.login === r.owner.login))
+  // reintroduce overrides
+  filteredRepos = [...filteredRepos, ...includedReposViaOverride]
+
+  return filteredRepos
 }
 
-const collectStats = async (username: string): Promise<UserStats> => {
-  const stargazerDetails = await getReposWithStargazers(username)
-  const statsUser = await getUserStats(username)
+const collectStats = async (c: CollectStatsOptions): Promise<UserStats> => {
+  const stargazerDetails = await getReposWithStargazers(c)
+  const statsUser = await getUserStats(c.username)
 
   const stats: UserStats = {
     avatarUrl: statsUser.user.avatarUrl,
