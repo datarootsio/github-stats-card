@@ -8,7 +8,6 @@ inputs:
   gh_token: 
     description: 'github token to use for api calls'
     required: true
-    default: ${{ secrets.GH_TOKEN }}
   badge_path:
     description: 'path to save badge to'
     required: true
