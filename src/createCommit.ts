@@ -1,5 +1,5 @@
 import * as github from '@actions/github'
-import * as path from 'path';
+import * as path from 'path'
 import * as fs from 'fs'
 
 interface CommitOptions {
@@ -15,9 +15,11 @@ const createCommit = async ({
   const octokit = github.getOctokit(ghToken)
 
   console.log(100)
+  const badgeDir = path.dirname(badgePath)
 
-  
-  fs.mkdirSync(path.dirname(badgePath), { recursive: true })
+  if (!fs.existsSync(badgeDir)) {
+    fs.mkdirSync(path.dirname(badgePath), { recursive: true })
+  }
   fs.writeFileSync(badgePath, svgContent)
 
   // create blob
