@@ -1,5 +1,6 @@
 import * as github from '@actions/github'
-import fs from 'fs'
+import * as path from 'path';
+import * as fs from 'fs'
 
 interface CommitOptions {
   ghToken: string
@@ -15,6 +16,8 @@ const createCommit = async ({
 
   console.log(100)
 
+  
+  fs.mkdirSync(path.dirname(badgePath), { recursive: true })
   fs.writeFileSync(badgePath, svgContent)
 
   // create blob
