@@ -33706,11 +33706,11 @@ const collectStats = async (c) => {
 /* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nccwpck_require__.n(_actions_github__WEBPACK_IMPORTED_MODULE_0__);
 
 const createCommit = async ({ ghToken, badgePath, svgContent }) => {
-    const octokit = _actions_github__WEBPACK_IMPORTED_MODULE_0___default().getOctokit(ghToken);
+    const octokit = _actions_github__WEBPACK_IMPORTED_MODULE_0__.getOctokit(ghToken);
     // create blob
     const { data: blobData } = await octokit.request('POST /repos/{owner}/{repo}/git/blobs', {
-        owner: (_actions_github__WEBPACK_IMPORTED_MODULE_0___default().context.repo.owner),
-        repo: (_actions_github__WEBPACK_IMPORTED_MODULE_0___default().context.repo.repo),
+        owner: _actions_github__WEBPACK_IMPORTED_MODULE_0__.context.repo.owner,
+        repo: _actions_github__WEBPACK_IMPORTED_MODULE_0__.context.repo.repo,
         content: Buffer.from(svgContent).toString('base64'),
         encoding: 'base64'
     });
@@ -33718,7 +33718,7 @@ const createCommit = async ({ ghToken, badgePath, svgContent }) => {
     const { data: treeData } = await octokit.request('POST /repos/{owner}/{repo}/git/trees', {
         owner: 'owner',
         repo: 'repo',
-        base_tree: (_actions_github__WEBPACK_IMPORTED_MODULE_0___default().context.sha),
+        base_tree: _actions_github__WEBPACK_IMPORTED_MODULE_0__.context.sha,
         tree: [
             {
                 path: badgePath,
@@ -33730,17 +33730,17 @@ const createCommit = async ({ ghToken, badgePath, svgContent }) => {
     });
     // create commit
     const { data: commitData } = await octokit.request('POST /repos/{owner}/{repo}/git/commits', {
-        owner: (_actions_github__WEBPACK_IMPORTED_MODULE_0___default().context.repo.owner),
-        repo: (_actions_github__WEBPACK_IMPORTED_MODULE_0___default().context.repo.repo),
+        owner: _actions_github__WEBPACK_IMPORTED_MODULE_0__.context.repo.owner,
+        repo: _actions_github__WEBPACK_IMPORTED_MODULE_0__.context.repo.repo,
         message: 'The treadmill bunnies generated a new badge',
         tree: treeData.sha,
-        parents: [(_actions_github__WEBPACK_IMPORTED_MODULE_0___default().context.sha)]
+        parents: [_actions_github__WEBPACK_IMPORTED_MODULE_0__.context.sha]
     });
     // update reference
     await octokit.request('PATCH /repos/{owner}/{repo}/git/refs/{ref}', {
-        owner: (_actions_github__WEBPACK_IMPORTED_MODULE_0___default().context.repo.owner),
-        repo: (_actions_github__WEBPACK_IMPORTED_MODULE_0___default().context.repo.repo),
-        ref: (_actions_github__WEBPACK_IMPORTED_MODULE_0___default().context.ref),
+        owner: _actions_github__WEBPACK_IMPORTED_MODULE_0__.context.repo.owner,
+        repo: _actions_github__WEBPACK_IMPORTED_MODULE_0__.context.repo.repo,
+        ref: _actions_github__WEBPACK_IMPORTED_MODULE_0__.context.ref,
         sha: commitData.sha
     });
 };
