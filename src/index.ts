@@ -13,11 +13,14 @@ try {
   console.log(3)
 
   const stats = await collectStats({ username })
+  console.log(4)
   const svgContent = generateSVG({
     about: 'He/him, cheese, dad, data,\nrocks & trails.',
     stats,
     username
   })
+
+  console.log(svgContent)
 
   const c: CommitOptions = {
     ghToken,

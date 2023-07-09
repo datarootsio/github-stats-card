@@ -12,6 +12,8 @@ const createCommit = async ({
 }: CommitOptions): Promise<void> => {
   const octokit = github.getOctokit(ghToken)
 
+  console.log(100)
+
   // create blob
   const { data: blobData } = await octokit.request('POST /repos/{owner}/{repo}/git/blobs', {
     owner: github.context.repo.owner,
@@ -19,6 +21,8 @@ const createCommit = async ({
     content: Buffer.from(svgContent).toString('base64'),
     encoding: 'base64'
   })
+
+  console.log(101)
 
   // create tree
   const { data: treeData } = await octokit.request('POST /repos/{owner}/{repo}/git/trees', {
@@ -35,6 +39,7 @@ const createCommit = async ({
     ]
   })
 
+  console.log(102)
   // create commit
   const { data: commitData } = await octokit.request('POST /repos/{owner}/{repo}/git/commits', {
     owner: github.context.repo.owner,
@@ -44,6 +49,8 @@ const createCommit = async ({
     parents: [github.context.sha]
   })
 
+  console.log(103)
+
   // update reference
   await octokit.request('PATCH /repos/{owner}/{repo}/git/refs/{ref}', {
     owner: github.context.repo.owner,
@@ -51,6 +58,8 @@ const createCommit = async ({
     ref: github.context.ref,
     sha: commitData.sha
   })
+
+  console.log(104)
 }
 
 export type { CommitOptions }
