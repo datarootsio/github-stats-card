@@ -33707,6 +33707,7 @@ const collectStats = async (c) => {
 
 const createCommit = async ({ ghToken, badgePath, svgContent }) => {
     const octokit = _actions_github__WEBPACK_IMPORTED_MODULE_0__.getOctokit(ghToken);
+    console.log(100);
     // create blob
     const { data: blobData } = await octokit.request('POST /repos/{owner}/{repo}/git/blobs', {
         owner: _actions_github__WEBPACK_IMPORTED_MODULE_0__.context.repo.owner,
@@ -33714,6 +33715,7 @@ const createCommit = async ({ ghToken, badgePath, svgContent }) => {
         content: Buffer.from(svgContent).toString('base64'),
         encoding: 'base64'
     });
+    console.log(101);
     // create tree
     const { data: treeData } = await octokit.request('POST /repos/{owner}/{repo}/git/trees', {
         owner: 'owner',
@@ -33728,6 +33730,7 @@ const createCommit = async ({ ghToken, badgePath, svgContent }) => {
             }
         ]
     });
+    console.log(102);
     // create commit
     const { data: commitData } = await octokit.request('POST /repos/{owner}/{repo}/git/commits', {
         owner: _actions_github__WEBPACK_IMPORTED_MODULE_0__.context.repo.owner,
@@ -33736,6 +33739,7 @@ const createCommit = async ({ ghToken, badgePath, svgContent }) => {
         tree: treeData.sha,
         parents: [_actions_github__WEBPACK_IMPORTED_MODULE_0__.context.sha]
     });
+    console.log(103);
     // update reference
     await octokit.request('PATCH /repos/{owner}/{repo}/git/refs/{ref}', {
         owner: _actions_github__WEBPACK_IMPORTED_MODULE_0__.context.repo.owner,
@@ -33743,6 +33747,7 @@ const createCommit = async ({ ghToken, badgePath, svgContent }) => {
         ref: _actions_github__WEBPACK_IMPORTED_MODULE_0__.context.ref,
         sha: commitData.sha
     });
+    console.log(104);
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (createCommit);
 
@@ -33850,11 +33855,13 @@ try {
     const badgePath = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('badge_path');
     console.log(3);
     const stats = await (0,_collectStats__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)({ username });
+    console.log(4);
     const svgContent = (0,_generateSvg__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z)({
         about: 'He/him, cheese, dad, data,\nrocks & trails.',
         stats,
         username
     });
+    console.log(svgContent);
     const c = {
         ghToken,
         svgContent,
