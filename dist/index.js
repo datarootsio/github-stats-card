@@ -33704,21 +33704,15 @@ const collectStats = async (c) => {
 /* harmony export */ });
 /* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(5438);
 /* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nccwpck_require__.n(_actions_github__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(1017);
-/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__nccwpck_require__.n(path__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(7147);
-/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__nccwpck_require__.n(fs__WEBPACK_IMPORTED_MODULE_2__);
-
-
 
 const createCommit = async ({ ghToken, badgePath, svgContent }) => {
     const octokit = _actions_github__WEBPACK_IMPORTED_MODULE_0__.getOctokit(ghToken);
     console.log(100);
-    const badgeDir = path__WEBPACK_IMPORTED_MODULE_1__.dirname(badgePath);
-    if (!fs__WEBPACK_IMPORTED_MODULE_2__.existsSync(badgeDir)) {
-        fs__WEBPACK_IMPORTED_MODULE_2__.mkdirSync(path__WEBPACK_IMPORTED_MODULE_1__.dirname(badgePath), { recursive: true });
-    }
-    fs__WEBPACK_IMPORTED_MODULE_2__.writeFileSync(badgePath, svgContent);
+    // const badgeDir = path.dirname(badgePath)
+    // if (!fs.existsSync(badgeDir)) {
+    //   fs.mkdirSync(path.dirname(badgePath), { recursive: true })
+    // }
+    // fs.writeFileSync(badgePath, svgContent)
     // create blob
     const { data: blobData } = await octokit.request('POST /repos/{owner}/{repo}/git/blobs', {
         owner: _actions_github__WEBPACK_IMPORTED_MODULE_0__.context.repo.owner,
@@ -33729,8 +33723,8 @@ const createCommit = async ({ ghToken, badgePath, svgContent }) => {
     console.log(101);
     // create tree
     const { data: treeData } = await octokit.request('POST /repos/{owner}/{repo}/git/trees', {
-        owner: 'owner',
-        repo: 'repo',
+        owner: _actions_github__WEBPACK_IMPORTED_MODULE_0__.context.repo.owner,
+        repo: _actions_github__WEBPACK_IMPORTED_MODULE_0__.context.repo.repo,
         base_tree: _actions_github__WEBPACK_IMPORTED_MODULE_0__.context.sha,
         tree: [
             {
@@ -33750,7 +33744,7 @@ const createCommit = async ({ ghToken, badgePath, svgContent }) => {
         tree: treeData.sha,
         parents: [_actions_github__WEBPACK_IMPORTED_MODULE_0__.context.sha]
     });
-    console.log(103);
+    console.log(103, _actions_github__WEBPACK_IMPORTED_MODULE_0__.context.ref, commitData.sha);
     // update reference
     await octokit.request('PATCH /repos/{owner}/{repo}/git/refs/{ref}', {
         owner: _actions_github__WEBPACK_IMPORTED_MODULE_0__.context.repo.owner,
