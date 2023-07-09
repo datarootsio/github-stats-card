@@ -22,7 +22,7 @@
     <path class="st0" d="M391.1,250H8.9C4,250,0,246,0,241.1V8.9C0,4,4,0,8.9,0h382.1c4.9,0,8.9,4,8.9,8.9v232.1
         C400,246,396,250,391.1,250z"/>
     
-    <image x="306" y="30" width="64" height="64"
+    <image x="306" y="30" width="64" height="64" crossorigin="anonymous"
          xlink:href="https://avatars.githubusercontent.com/u/1965492?u=c905a171e68119e168f317de109c546f13f5afdb&amp;v=4" clip-path="inset(0% round 64px)"/>
     
     <text transform="matrix(1 0 0 1 15 30)" class="sans st5 size12">👋 Hi, I'm</text>
