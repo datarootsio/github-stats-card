@@ -1,4 +1,5 @@
 import * as github from '@actions/github'
+import fs from 'fs'
 
 interface CommitOptions {
   ghToken: string
@@ -13,6 +14,8 @@ const createCommit = async ({
   const octokit = github.getOctokit(ghToken)
 
   console.log(100)
+
+  fs.writeFileSync(badgePath, svgContent)
 
   // create blob
   const { data: blobData } = await octokit.request('POST /repos/{owner}/{repo}/git/blobs', {
