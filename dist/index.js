@@ -33842,9 +33842,13 @@ __nccwpck_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 
 
 try {
+    console.log(0);
     const username = _actions_core__WEBPACK_IMPORTED_MODULE_0___default().getInput('username');
+    console.log(1);
     const ghToken = _actions_core__WEBPACK_IMPORTED_MODULE_0___default().getInput('gh_token');
+    console.log(2);
     const badgePath = _actions_core__WEBPACK_IMPORTED_MODULE_0___default().getInput('badge_path');
+    console.log(3);
     const stats = await (0,_collectStats__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)({ username });
     const svgContent = (0,_generateSvg__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z)({
         about: 'He/him, cheese, dad, data,\nrocks & trails.',
@@ -33860,7 +33864,6 @@ try {
     _actions_core__WEBPACK_IMPORTED_MODULE_0___default().setOutput('badgePath', badgePath);
 }
 catch (error) {
-    console.log(error);
     if (error instanceof Error)
         _actions_core__WEBPACK_IMPORTED_MODULE_0___default().setFailed(error.message);
 }
