@@ -33749,7 +33749,7 @@ const createCommit = async ({ ghToken, badgePath, svgContent }) => {
     await octokit.request('PATCH /repos/{owner}/{repo}/git/refs/{ref}', {
         owner: _actions_github__WEBPACK_IMPORTED_MODULE_0__.context.repo.owner,
         repo: _actions_github__WEBPACK_IMPORTED_MODULE_0__.context.repo.repo,
-        ref: _actions_github__WEBPACK_IMPORTED_MODULE_0__.context.ref,
+        ref: _actions_github__WEBPACK_IMPORTED_MODULE_0__.context.ref.replace('refs/', ''),
         sha: commitData.sha
     });
     console.log(104);
