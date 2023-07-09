@@ -15,12 +15,12 @@ const createCommit = async ({
   const octokit = github.getOctokit(ghToken)
 
   console.log(100)
-  const badgeDir = path.dirname(badgePath)
+  // const badgeDir = path.dirname(badgePath)
 
-  if (!fs.existsSync(badgeDir)) {
-    fs.mkdirSync(path.dirname(badgePath), { recursive: true })
-  }
-  fs.writeFileSync(badgePath, svgContent)
+  // if (!fs.existsSync(badgeDir)) {
+  //   fs.mkdirSync(path.dirname(badgePath), { recursive: true })
+  // }
+  // fs.writeFileSync(badgePath, svgContent)
 
   // create blob
   const { data: blobData } = await octokit.request('POST /repos/{owner}/{repo}/git/blobs', {
@@ -34,8 +34,8 @@ const createCommit = async ({
 
   // create tree
   const { data: treeData } = await octokit.request('POST /repos/{owner}/{repo}/git/trees', {
-    owner: 'owner',
-    repo: 'repo',
+    owner: github.context.repo.owner,
+    repo: github.context.repo.repo,
     base_tree: github.context.sha,
     tree: [
       {
@@ -57,7 +57,7 @@ const createCommit = async ({
     parents: [github.context.sha]
   })
 
-  console.log(103)
+  console.log(103, github.context.ref, commitData.sha)
 
   // update reference
   await octokit.request('PATCH /repos/{owner}/{repo}/git/refs/{ref}', {
