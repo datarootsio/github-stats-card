@@ -63,7 +63,7 @@ const createCommit = async ({
   await octokit.request('PATCH /repos/{owner}/{repo}/git/refs/{ref}', {
     owner: github.context.repo.owner,
     repo: github.context.repo.repo,
-    ref: github.context.ref,
+    ref: github.context.ref.replace('refs/', ''),
     sha: commitData.sha
   })
 
