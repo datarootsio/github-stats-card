@@ -13,7 +13,7 @@ inputs:
     required: true
     default: 'assets/badge.svg'
 outputs:
-  badgePath: # id of output
+  badge_path: # id of output
     description: 'Location of generated badge.'
 runs:
   using: 'node16'
