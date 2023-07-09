@@ -33860,6 +33860,7 @@ try {
     _actions_core__WEBPACK_IMPORTED_MODULE_0___default().setOutput('badgePath', badgePath);
 }
 catch (error) {
+    console.log(error);
     if (error instanceof Error)
         _actions_core__WEBPACK_IMPORTED_MODULE_0___default().setFailed(error.message);
 }
