@@ -27,7 +27,7 @@ jobs:
       - name: commit dist to repo
         uses: stefanzweifel/git-auto-commit-action@v4
       - uses: ./
-        name: gh-stats
+        name: github-stats-card
         with:
           username: bart6114
           gh_token: ${{ env.GITHUB_TOKEN }}

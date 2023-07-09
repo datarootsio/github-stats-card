@@ -1,4 +1,4 @@
-import core from '@actions/core'
+import * as core from '@actions/core'
 import createCommit, { type CommitOptions } from './createCommit'
 import collectStats from './collectStats'
 import generateSVG from './generateSvg'

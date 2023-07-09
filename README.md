@@ -1,4 +1,4 @@
-# gh-stats: a minimal but inclusive github stats badge
+# github-stats-card: a minimal but inclusive github stats badge
 
 
 

@@ -1,5 +1,5 @@
 {
-  "name": "gh-stats",
+  "name": "github-stats-card",
   "version": "1.0.0",
   "description": "a minimal but inclusive github stats badge",
   "type": "module",

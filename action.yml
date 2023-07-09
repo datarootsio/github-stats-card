@@ -1,4 +1,4 @@
-name: 'gh-stats'
+name: 'github-stats-card'
 description: 'Generate a minimal but inclusive github stats badge'
 inputs:
   username: 
