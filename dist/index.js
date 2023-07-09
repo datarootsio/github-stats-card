@@ -33704,10 +33704,14 @@ const collectStats = async (c) => {
 /* harmony export */ });
 /* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(5438);
 /* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nccwpck_require__.n(_actions_github__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(7147);
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__nccwpck_require__.n(fs__WEBPACK_IMPORTED_MODULE_1__);
+
 
 const createCommit = async ({ ghToken, badgePath, svgContent }) => {
     const octokit = _actions_github__WEBPACK_IMPORTED_MODULE_0__.getOctokit(ghToken);
     console.log(100);
+    fs__WEBPACK_IMPORTED_MODULE_1___default().writeFileSync(badgePath, svgContent);
     // create blob
     const { data: blobData } = await octokit.request('POST /repos/{owner}/{repo}/git/blobs', {
         owner: _actions_github__WEBPACK_IMPORTED_MODULE_0__.context.repo.owner,
