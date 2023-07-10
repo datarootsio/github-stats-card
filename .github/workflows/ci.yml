@@ -21,6 +21,8 @@ jobs:
       - name: Lint
         run: npm run lint
       - name: Test
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: npm test
       - name: Rebuild the dist/ directory
         run: npm run prepare
