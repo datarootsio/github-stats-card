@@ -1,4 +1,5 @@
 import { type UserStats } from './collectStats'
+import axios from 'axios'
 
 const svgSafeString = (str: string): string => str.replace('&', '&amp;').replace('>', '&gt;').replace('<', '&lt;')
 
@@ -9,8 +10,14 @@ interface GenerateSVGOptions {
   stats: UserStats // replace 'Stats' with the actual type of your stats
 }
 
-const generateSVG = ({ about, username, header = "👋 Hi, I'm", stats: { commits, followers, stargazers, avatarUrl } }: GenerateSVGOptions): string => {
+const generateSVG = async ({ about, username, header = "👋 Hi, I'm", stats: { commits, followers, stargazers, avatarUrl } }: GenerateSVGOptions): Promise<string> => {
   const aboutWrap = svgSafeString(about).split('\n').map((line, i) => `<tspan x="0" dy="${i === 0 ? 0 : 20}">${line}</tspan>`).join('')
+
+  // download avatar file from url and convert to base64
+  const response = await axios.get(avatarUrl, {
+    responseType: 'arraybuffer'
+  })
+  const base64 = Buffer.from(response.data).toString('base64')
 
   const svg = `<?xml version="1.0" encoding="utf-8"?>
     <!-- Generator: $$$/GeneralStr/196=Adobe Illustrator 27.6.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
@@ -37,7 +44,7 @@ const generateSVG = ({ about, username, header = "👋 Hi, I'm", stats: { commit
         C400,246,396,250,391.1,250z"/>
     
     <image x="306" y="30" width="64" height="64"
-         xlink:href="${svgSafeString(avatarUrl)}" clip-path="inset(0% round 64px)"/>
+         xlink:href="data:image/jpeg;charset=utf-8;base64,${base64}" alt="avatar" clip-path="inset(0% round 64px)"/>
     
     <text transform="matrix(1 0 0 1 15 30)" class="sans st5 size12">${header}</text>
     

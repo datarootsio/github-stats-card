@@ -3,6 +3,7 @@ import { expect, test } from '@jest/globals'
 import generateSvg from '../generateSvg'
 import collectStats from '../collectStats'
 import { XMLParser } from 'fast-xml-parser'
+import fs from 'fs'
 
 if (process.env.GITHUB_TOKEN === undefined) {
   throw new Error('GITHUB_TOKEN is not defined')
@@ -11,13 +12,22 @@ const ghToken = process.env.GITHUB_TOKEN
 
 test('generateSVG', async () => {
   const stats = await collectStats({ ghToken, username: 'bart6114' })
-  const svg = generateSvg(
+  const svg = await generateSvg(
     {
       about: 'He/him, cheese, dad, data,\nrocks & trails.',
       stats,
       username: 'bart6114'
     }
   )
+
+  // for debugging purposes
+  fs.writeFile('test_badge.svg', svg, err => {
+    if (err != null) {
+      // eslint-disable-next-line
+      console.error(err);
+    }
+    // file written successfully
+  })
 
   const parser = new XMLParser()
   const svgDoc: object = parser.parse(svg)

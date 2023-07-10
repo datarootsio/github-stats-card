@@ -12,7 +12,7 @@ try {
 
   const stats = await collectStats({ ghToken: ghTokenStats, username })
 
-  const svgContent = generateSVG({
+  const svgContent = await generateSVG({
     about: 'He/him, cheese, dad, data,\nrocks & trails.',
     stats,
     username
