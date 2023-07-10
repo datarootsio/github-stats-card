@@ -1,32 +1,32 @@
-name: 'github-stats-card'
-description: 'Generate a minimal but inclusive github stats badge'
+name: "github-stats-card"
+description: "Generate a minimal but inclusive github stats badge"
 author: Bart6114
 inputs:
-  username: 
-    description: 'username to get stats for'
+  username:
+    description: "username to get stats for"
     required: true
-    default: 'bart6114'
+    default: "bart6114"
   header:
-    description: 'header to use for badge'
-    default: '👋 hi i'm'
+    description: "header to use for badge"
+    default: "👋 hi i'm"
   about:
     description: 'about me description to use for badge (use \n for newlines)'
     default: 'Loves goblins, despises gnomes.\nEnjoys candlelit custard pudding.'
-  gh_token_stats: 
-    description: 'github token to use to fetch user stats'
+  gh_token_stats:
+    description: "github token to use to fetch user stats"
     required: true
   gh_token_commits:
-    description: 'github token to use to commit badge to repo, will default to stats token if not provided'
+    description: "github token to use to commit badge to repo, will default to stats token if not provided"
   badge_path:
-    description: 'path to save badge to (defaults to assets/badge.svg)'
-    default: 'assets/badge.svg'
+    description: "path to save badge to (defaults to assets/badge.svg)"
+    default: "assets/badge.svg"
   commit_message:
-    description: 'commit message to use when pushing badge to repo'
-    default: 'Update badge'
+    description: "commit message to use when pushing badge to repo"
+    default: "Update badge"
 
 outputs:
   badge_path: # id of output
-    description: 'Location of generated badge.'
+    description: "Location of generated badge."
 runs:
-  using: 'node16'
-  main: 'dist/index.js'
+  using: "node16"
+  main: "dist/index.js"
