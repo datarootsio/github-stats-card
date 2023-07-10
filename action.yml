@@ -8,7 +8,7 @@ inputs:
     default: "bart6114"
   header:
     description: "header to use for badge"
-    default: "hi i'm"
+    default: "👋 hi i'm"
   about:
     description: "about me description to use for badge (use \n for newlines)"
     default: "Loves goblins, despises gnomes.\nEnjoys candlelit custard pudding."
