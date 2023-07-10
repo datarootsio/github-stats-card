@@ -33705,14 +33705,8 @@ const collectStats = async (c) => {
 /* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(5438);
 /* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nccwpck_require__.n(_actions_github__WEBPACK_IMPORTED_MODULE_0__);
 
-const createCommit = async ({ ghToken, badgePath, svgContent }) => {
+const createCommit = async ({ ghToken, badgePath, svgContent, commitMessage }) => {
     const octokit = _actions_github__WEBPACK_IMPORTED_MODULE_0__.getOctokit(ghToken);
-    console.log(100);
-    // const badgeDir = path.dirname(badgePath)
-    // if (!fs.existsSync(badgeDir)) {
-    //   fs.mkdirSync(path.dirname(badgePath), { recursive: true })
-    // }
-    // fs.writeFileSync(badgePath, svgContent)
     // create blob
     const { data: blobData } = await octokit.request('POST /repos/{owner}/{repo}/git/blobs', {
         owner: _actions_github__WEBPACK_IMPORTED_MODULE_0__.context.repo.owner,
@@ -33720,7 +33714,6 @@ const createCommit = async ({ ghToken, badgePath, svgContent }) => {
         content: Buffer.from(svgContent).toString('base64'),
         encoding: 'base64'
     });
-    console.log(101);
     // create tree
     const { data: treeData } = await octokit.request('POST /repos/{owner}/{repo}/git/trees', {
         owner: _actions_github__WEBPACK_IMPORTED_MODULE_0__.context.repo.owner,
@@ -33735,16 +33728,14 @@ const createCommit = async ({ ghToken, badgePath, svgContent }) => {
             }
         ]
     });
-    console.log(102);
     // create commit
     const { data: commitData } = await octokit.request('POST /repos/{owner}/{repo}/git/commits', {
         owner: _actions_github__WEBPACK_IMPORTED_MODULE_0__.context.repo.owner,
         repo: _actions_github__WEBPACK_IMPORTED_MODULE_0__.context.repo.repo,
-        message: 'The treadmill bunnies generated a new badge',
+        message: `${commitMessage} [skip ci]`,
         tree: treeData.sha,
         parents: [_actions_github__WEBPACK_IMPORTED_MODULE_0__.context.sha]
     });
-    console.log(103, _actions_github__WEBPACK_IMPORTED_MODULE_0__.context.ref, commitData.sha);
     // update reference
     await octokit.request('PATCH /repos/{owner}/{repo}/git/refs/{ref}', {
         owner: _actions_github__WEBPACK_IMPORTED_MODULE_0__.context.repo.owner,
@@ -33752,7 +33743,6 @@ const createCommit = async ({ ghToken, badgePath, svgContent }) => {
         ref: _actions_github__WEBPACK_IMPORTED_MODULE_0__.context.ref.replace('refs/', ''),
         sha: commitData.sha
     });
-    console.log(104);
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (createCommit);
 
@@ -33852,25 +33842,21 @@ __nccwpck_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 
 
 try {
-    console.log(0);
     const username = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('username');
-    console.log(1);
     const ghToken = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('gh_token');
-    console.log(2);
     const badgePath = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('badge_path');
-    console.log(3);
+    const commitMessage = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('commit_message');
     const stats = await (0,_collectStats__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)({ username });
-    console.log(4);
     const svgContent = (0,_generateSvg__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z)({
         about: 'He/him, cheese, dad, data,\nrocks & trails.',
         stats,
         username
     });
-    console.log(svgContent);
     const c = {
         ghToken,
         svgContent,
-        badgePath
+        badgePath,
+        commitMessage
     };
     await (0,_createCommit__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z)(c);
     _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput('badgePath', badgePath);

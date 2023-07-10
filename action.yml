@@ -13,6 +13,11 @@ inputs:
     description: 'path to save badge to'
     required: true
     default: 'assets/badge.svg'
+  commit_message:
+    description: 'commit message to use when pushing badge to repo'
+    required: true
+    default: 'Update badge'
+
 outputs:
   badge_path: # id of output
     description: 'Location of generated badge.'
