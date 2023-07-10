@@ -22,7 +22,7 @@
     <path class="st0" d="M391.1,250H8.9C4,250,0,246,0,241.1V8.9C0,4,4,0,8.9,0h382.1c4.9,0,8.9,4,8.9,8.9v232.1
         C400,246,396,250,391.1,250z"/>
     
-    <image x="306" y="30" width="64" height="64" crossorigin="anonymous"
+    <image x="306" y="30" width="64" height="64"
          xlink:href="https://avatars.githubusercontent.com/u/1965492?u=c905a171e68119e168f317de109c546f13f5afdb&amp;v=4" clip-path="inset(0% round 64px)"/>
     
     <text transform="matrix(1 0 0 1 15 30)" class="sans st5 size12">👋 Hi, I'm</text>
@@ -46,7 +46,7 @@
             s-2-4.5-4.5-4.5l0,0c-2.5,0-4.5,2-4.5,4.5S22,169.3,24.5,169.3z"/>
     </g>
     
-    <text transform="matrix(1 0 0 1 44.0453 170) translate(0, 25)" class="mono st5 size12">385 commits in last year</text>
+    <text transform="matrix(1 0 0 1 44.0453 170) translate(0, 25)" class="mono st5 size12">389 commits in last year</text>
     
     <path transform="translate(0, 25)"
     class="st4" d="M18.5,185.4c0-1.9,1.6-3.5,3.5-3.5c1.9,0,3.5,1.6,3.5,3.5c0,1-0.4,1.9-1.1,2.5c1.6,0.8,2.7,2.3,3,4.1
