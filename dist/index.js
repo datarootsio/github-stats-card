@@ -33602,16 +33602,12 @@ const gql = (chunks, ...variables) => {
 ;// CONCATENATED MODULE: ./src/collectStats.ts
 
 const GITHUB_API_URL = 'https://api.github.com/graphql';
-// assert that process.env.GITHUB_TOKEN is set
-if (process.env.GITHUB_TOKEN === undefined) {
-    throw new Error('Please set the GITHUB_TOKEN environment variable');
-}
-const client = new GraphQLClient(GITHUB_API_URL, {
+const getGithubClient = (ghToken) => (new GraphQLClient(GITHUB_API_URL, {
     headers: {
-        Authorization: `bearer ${process.env.GITHUB_TOKEN}`
+        Authorization: `bearer ${ghToken}`
     }
-});
-const getUserStats = async (username) => {
+}));
+const getUserStats = async (client, username) => {
     const query = `
     {
         user(login: "${username}") {
@@ -33634,7 +33630,7 @@ const getUserStats = async (username) => {
     const data = await client.request(query);
     return data;
 };
-const getReposWithStargazers = async ({ username, excludeRepos = [], includeReposOverride = [] }, afterCursor = '') => {
+const getReposWithStargazers = async (client, { ghToken, username, excludeRepos = [], includeReposOverride = [] }, afterCursor = '') => {
     let repos = [];
     const query = `
     {
@@ -33662,7 +33658,7 @@ const getReposWithStargazers = async ({ username, excludeRepos = [], includeRepo
     const data = await client.request(query);
     const endCursor = data.user.repositories.pageInfo.endCursor;
     if (endCursor != null) {
-        repos = [...data.user.repositories.nodes, ...await getReposWithStargazers({ username, includeReposOverride, excludeRepos }, endCursor)];
+        repos = [...data.user.repositories.nodes, ...await getReposWithStargazers(client, { ghToken, username, includeReposOverride, excludeRepos }, endCursor)];
     }
     // create regexes from userinput
     const excludeRegexes = excludeRepos.map(ep => RegExp(ep));
@@ -33679,8 +33675,9 @@ const getReposWithStargazers = async ({ username, excludeRepos = [], includeRepo
     return filteredRepos;
 };
 const collectStats = async (c) => {
-    const stargazerDetails = await getReposWithStargazers(c);
-    const statsUser = await getUserStats(c.username);
+    const client = getGithubClient(c.ghToken);
+    const stargazerDetails = await getReposWithStargazers(client, c);
+    const statsUser = await getUserStats(client, c.username);
     const stats = {
         avatarUrl: statsUser.user.avatarUrl,
         commits: statsUser.user.contributionsCollection.totalCommitContributions,
@@ -33843,17 +33840,19 @@ __nccwpck_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 
 try {
     const username = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('username');
-    const ghToken = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('gh_token');
+    const ghTokenStats = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('gh_token_stats');
+    const ghTokenCommits = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('gh_token_commits');
     const badgePath = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('badge_path');
     const commitMessage = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('commit_message');
-    const stats = await (0,_collectStats__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)({ username });
+    const stats = await (0,_collectStats__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)({ ghToken: ghTokenStats, username });
     const svgContent = (0,_generateSvg__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z)({
         about: 'He/him, cheese, dad, data,\nrocks & trails.',
         stats,
         username
     });
+    const commitToken = ghTokenCommits === '' ? ghTokenStats : ghTokenCommits;
     const c = {
-        ghToken,
+        ghToken: commitToken,
         svgContent,
         badgePath,
         commitMessage

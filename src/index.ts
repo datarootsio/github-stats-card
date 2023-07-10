@@ -5,11 +5,12 @@ import generateSVG from './generateSvg'
 
 try {
   const username: string = core.getInput('username')
-  const ghToken: string = core.getInput('gh_token')
+  const ghTokenStats: string = core.getInput('gh_token_stats')
+  const ghTokenCommits: string = core.getInput('gh_token_commits')
   const badgePath: string = core.getInput('badge_path')
   const commitMessage: string = core.getInput('commit_message')
 
-  const stats = await collectStats({ username })
+  const stats = await collectStats({ ghToken: ghTokenStats, username })
 
   const svgContent = generateSVG({
     about: 'He/him, cheese, dad, data,\nrocks & trails.',
@@ -17,8 +18,10 @@ try {
     username
   })
 
+  const commitToken = ghTokenCommits === '' ? ghTokenStats : ghTokenCommits
+
   const c: CommitOptions = {
-    ghToken,
+    ghToken: commitToken,
     svgContent,
     badgePath,
     commitMessage

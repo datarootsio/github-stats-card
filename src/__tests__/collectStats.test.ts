@@ -1,10 +1,15 @@
 // test collection for collectStats
-import '../config'
+import './config_test_env'
 import { expect, test } from '@jest/globals'
 import collectStats from '../collectStats'
 
+if (process.env.GITHUB_TOKEN === undefined) {
+  throw new Error('GITHUB_TOKEN is not defined')
+}
+const ghToken = process.env.GITHUB_TOKEN
+
 test('collectStats', async () => {
-  const stats = await collectStats({ username: 'bart6114' })
+  const stats = await collectStats({ ghToken, username: 'bart6114' })
   expect(stats).toBeDefined()
   expect(stats.avatarUrl).toBeDefined()
   expect(stats.commits).toBeDefined()
@@ -19,7 +24,7 @@ test('collectStats', async () => {
 }, 10000)
 
 test('collectStatsWithFilter', async () => {
-  const stats = await collectStats({ username: 'bart6114', excludeRepos: ['datarootsio'], includeReposOverride: ['datarootsio/databooks'] })
+  const stats = await collectStats({ ghToken, username: 'bart6114', excludeRepos: ['datarootsio'], includeReposOverride: ['datarootsio/databooks'] })
   expect(stats).toBeDefined()
   expect(stats.avatarUrl).toBeDefined()
   expect(stats.commits).toBeDefined()

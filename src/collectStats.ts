@@ -1,18 +1,16 @@
 import { GraphQLClient } from 'graphql-request'
 const GITHUB_API_URL = 'https://api.github.com/graphql'
 
-// assert that process.env.GITHUB_TOKEN is set
-if (process.env.GITHUB_TOKEN === undefined) {
-  throw new Error('Please set the GITHUB_TOKEN environment variable')
-}
-
-const client = new GraphQLClient(GITHUB_API_URL, {
-  headers: {
-    Authorization: `bearer ${process.env.GITHUB_TOKEN}`
-  }
-})
+const getGithubClient = (ghToken: string): GraphQLClient => (
+  new GraphQLClient(GITHUB_API_URL, {
+    headers: {
+      Authorization: `bearer ${ghToken}`
+    }
+  })
+)
 
 interface CollectStatsOptions {
+  ghToken: string
   username: string
   excludeRepos?: string[]
   includeReposOverride?: string[]
@@ -64,7 +62,7 @@ export interface UserStats {
   stargazers: number
 }
 
-const getUserStats = async (username: string): Promise<GHAPIUserStats> => {
+const getUserStats = async (client: GraphQLClient, username: string): Promise<GHAPIUserStats> => {
   const query = `
     {
         user(login: "${username}") {
@@ -89,7 +87,7 @@ const getUserStats = async (username: string): Promise<GHAPIUserStats> => {
   return data
 }
 
-const getReposWithStargazers = async ({ username, excludeRepos = [], includeReposOverride = [] }: CollectStatsOptions, afterCursor = ''): Promise<GHReposWithStargazers[]> => {
+const getReposWithStargazers = async (client: GraphQLClient, { ghToken, username, excludeRepos = [], includeReposOverride = [] }: CollectStatsOptions, afterCursor = ''): Promise<GHReposWithStargazers[]> => {
   let repos: GHReposWithStargazers[] = []
   const query = `
     {
@@ -119,7 +117,7 @@ const getReposWithStargazers = async ({ username, excludeRepos = [], includeRepo
   const endCursor = data.user.repositories.pageInfo.endCursor
 
   if (endCursor != null) {
-    repos = [...data.user.repositories.nodes, ...await getReposWithStargazers({ username, includeReposOverride, excludeRepos }, endCursor)]
+    repos = [...data.user.repositories.nodes, ...await getReposWithStargazers(client, { ghToken, username, includeReposOverride, excludeRepos }, endCursor)]
   }
 
   // create regexes from userinput
@@ -141,8 +139,9 @@ const getReposWithStargazers = async ({ username, excludeRepos = [], includeRepo
 }
 
 const collectStats = async (c: CollectStatsOptions): Promise<UserStats> => {
-  const stargazerDetails = await getReposWithStargazers(c)
-  const statsUser = await getUserStats(c.username)
+  const client = getGithubClient(c.ghToken)
+  const stargazerDetails = await getReposWithStargazers(client, c)
+  const statsUser = await getUserStats(client, c.username)
 
   const stats: UserStats = {
     avatarUrl: statsUser.user.avatarUrl,

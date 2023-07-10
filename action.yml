@@ -6,9 +6,11 @@ inputs:
     description: 'username to get stats for'
     required: true
     default: 'bart6114'
-  gh_token: 
-    description: 'github token to use for api calls'
+  gh_token_stats: 
+    description: 'github token to use to fetch user stats'
     required: true
+  gh_token_commits:
+    description: 'github token to use to commit badge to repo'
   badge_path:
     description: 'path to save badge to'
     required: true
