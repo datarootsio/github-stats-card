@@ -1,6 +1,6 @@
 import './config_test_env'
 import { expect, test } from '@jest/globals'
-import generateSvg from '../generateSvg'
+import generateSvg, { fillTemplate } from '../generateSvg'
 import collectStats from '../collectStats'
 import { XMLParser } from 'fast-xml-parser'
 import fs from 'fs'
@@ -37,3 +37,8 @@ test('generateSVG', async () => {
   // eslint-disable-next-line
   console.log(svg) 
 }, 10000)
+
+test('templater', () => {
+  const r = fillTemplate('hello {{ name }}', { name: 'world' })
+  expect(r).toBe('hello world')
+})
