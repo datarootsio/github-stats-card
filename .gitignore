@@ -128,4 +128,6 @@ out
 .yarn/install-state.gz
 .pnp.*
 
-*.svg
+test*.svg
+wip*.svg
+.DS_Store
