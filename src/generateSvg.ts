@@ -20,7 +20,7 @@ const fillTemplate = (template: string, data: Record<string, string | number>): 
   return output
 }
 
-const generateSVG = async ({ about, username, header = "👋 Hi, I'm", stats: { commits, followers, stargazers, avatarUrl } }: GenerateSVGOptions): Promise<string> => {
+const generateSVG = async ({ username, about = '', header = "👋 Hi, I'm", stats: { commits, followers, stargazers, avatarUrl } }: GenerateSVGOptions): Promise<string> => {
   const aboutWrap = svgSafeString(about).split('\n').map((line, i) => `<tspan x="0" dy="${i === 0 ? 0 : 20}">${line}</tspan>`).join('')
 
   // download avatar file from url and convert to base64
