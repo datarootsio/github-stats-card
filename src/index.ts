@@ -11,8 +11,10 @@ try {
   const commitMessage: string = core.getInput('commit_message')
   const header: string = core.getInput('header')
   const about: string = core.getInput('about')
+  const excludeRepos: string[] = core.getInput('exclude_repos').split(',')
+  const excludeReposOverride: string[] = core.getInput('exclude_repos_override').split(',')
 
-  const stats = await collectStats({ ghToken: ghTokenStats, username })
+  const stats = await collectStats({ ghToken: ghTokenStats, username, excludeRepos, excludeReposOverride })
 
   const svgContent = await generateSVG({
     header,

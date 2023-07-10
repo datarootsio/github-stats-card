@@ -13,7 +13,7 @@ interface CollectStatsOptions {
   ghToken: string
   username: string
   excludeRepos?: string[]
-  includeReposOverride?: string[]
+  excludeReposOverride?: string[]
 }
 
 interface GHAPIUserStats {
@@ -87,7 +87,7 @@ const getUserStats = async (client: GraphQLClient, username: string): Promise<GH
   return data
 }
 
-const getReposWithStargazers = async (client: GraphQLClient, { ghToken, username, excludeRepos = [], includeReposOverride = [] }: CollectStatsOptions, afterCursor = ''): Promise<GHReposWithStargazers[]> => {
+const getReposWithStargazers = async (client: GraphQLClient, { ghToken, username, excludeRepos = [], excludeReposOverride: includeReposOverride = [] }: CollectStatsOptions, afterCursor = ''): Promise<GHReposWithStargazers[]> => {
   let repos: GHReposWithStargazers[] = []
   const query = `
     {
@@ -117,7 +117,7 @@ const getReposWithStargazers = async (client: GraphQLClient, { ghToken, username
   const endCursor = data.user.repositories.pageInfo.endCursor
 
   if (endCursor != null) {
-    repos = [...data.user.repositories.nodes, ...await getReposWithStargazers(client, { ghToken, username, includeReposOverride, excludeRepos }, endCursor)]
+    repos = [...data.user.repositories.nodes, ...await getReposWithStargazers(client, { ghToken, username, excludeReposOverride: includeReposOverride, excludeRepos }, endCursor)]
   }
 
   // create regexes from userinput

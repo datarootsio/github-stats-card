@@ -38871,7 +38871,7 @@ const getUserStats = async (client, username) => {
     const data = await client.request(query);
     return data;
 };
-const getReposWithStargazers = async (client, { ghToken, username, excludeRepos = [], includeReposOverride = [] }, afterCursor = '') => {
+const getReposWithStargazers = async (client, { ghToken, username, excludeRepos = [], excludeReposOverride: includeReposOverride = [] }, afterCursor = '') => {
     let repos = [];
     const query = `
     {
@@ -38899,7 +38899,7 @@ const getReposWithStargazers = async (client, { ghToken, username, excludeRepos 
     const data = await client.request(query);
     const endCursor = data.user.repositories.pageInfo.endCursor;
     if (endCursor != null) {
-        repos = [...data.user.repositories.nodes, ...await getReposWithStargazers(client, { ghToken, username, includeReposOverride, excludeRepos }, endCursor)];
+        repos = [...data.user.repositories.nodes, ...await getReposWithStargazers(client, { ghToken, username, excludeReposOverride: includeReposOverride, excludeRepos }, endCursor)];
     }
     // create regexes from userinput
     const excludeRegexes = excludeRepos.map(ep => RegExp(ep));
@@ -43594,7 +43594,9 @@ try {
     const commitMessage = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('commit_message');
     const header = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('header');
     const about = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('about');
-    const stats = await (0,_collectStats__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)({ ghToken: ghTokenStats, username });
+    const excludeRepos = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('exclude_repos').split(',');
+    const excludeReposOverride = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('exclude_repos_override').split(',');
+    const stats = await (0,_collectStats__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)({ ghToken: ghTokenStats, username, excludeRepos, excludeReposOverride });
     const svgContent = await (0,_generateSvg__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z)({
         header,
         about,

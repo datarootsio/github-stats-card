@@ -33,17 +33,21 @@ If the workflow has succesfully ran, it will create a badge under `assets/badge.
 
 `username`: your username
 
-`gh_token_stats`: token used for fetching user stats, typically a [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) (PAT) with access to your personal and organisation repos.
+`gh_token_stats`: token used for fetching user stats, typically a [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) (PAT) with access to your personal and organisation repos
 
-`gh_token_commits`: [optional] if you set this to `${{ secrets.GITHUB_TOKEN }}` it will use the github actions bot to commit the svg to the repo (if not set it will use your PAT).
+`gh_token_commits`: [optional] if you set this to `${{ secrets.GITHUB_TOKEN }}` it will use the github actions bot to commit the svg to the repo (if not set it will use your PAT)
 
-`badge_path`: [optional] path of badge svg (defaults to `assets/badge.svg`).
+`badge_path`: [optional] path of badge svg (defaults to `assets/badge.svg`)
 
-`header`: [optional] header to use for badge (defaults to: `👋 hi i'm`).
+`header`: [optional] header to use for badge (defaults to: `👋 hi i'm`)
 
-`about`: about me description to use for badge (use \n for newlines).
+`about`: about me description to use for badge (use \n for newlines)
 
-`commit_message`: [optional] commit message to use (defaults to `Update badge`).
+`commit_message`: [optional] commit message to use (defaults to `Update badge`)
+
+`exclude_repos`: [optional] comma separated list of repos to exclude from stats, will do regex based matching (e.g. 'datarootsio' will match all repos in dataroots, 'datarootsio/databooks' will only match a single repo)
+
+`exclude_repos_override`: [optional] comma separated list of repos to override from exclusion list (e.g. 'datarootsio' in exclude_repos and 'datarootsio/databooks' in exclude_repos_override will ONLY include databooks in stats)
 
 ## Disclaimer
 

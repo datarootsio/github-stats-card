@@ -24,7 +24,7 @@ test('collectStats', async () => {
 }, 10000)
 
 test('collectStatsWithFilter', async () => {
-  const stats = await collectStats({ ghToken, username: 'bart6114', excludeRepos: ['datarootsio'], includeReposOverride: ['datarootsio/databooks'] })
+  const stats = await collectStats({ ghToken, username: 'bart6114', excludeRepos: ['datarootsio'], excludeReposOverride: ['datarootsio/databooks'] })
   expect(stats).toBeDefined()
   expect(stats.avatarUrl).toBeDefined()
   expect(stats.commits).toBeDefined()

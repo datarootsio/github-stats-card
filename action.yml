@@ -23,6 +23,13 @@ inputs:
   commit_message:
     description: "commit message to use when pushing badge to repo"
     default: "Update badge"
+  exclude_repos:
+    description: "comma separated list of repos to exclude from stats, will do regex based matching (e.g. 'datarootsio' will match all repos in dataroots, 'datarootsio/databooks' will only match a single repo)"
+    default: ""
+  exclude_repos_override:
+    description: "comma separated list of repos to override from exclusion list (e.g. 'datarootsio' in exclude_repos and 'datarootsio/databooks' in exclude_repos_override will ONLY include databooks in stats)"
+    default: ""
+
 
 outputs:
   badge_path: # id of output
