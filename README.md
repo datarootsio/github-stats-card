@@ -51,4 +51,4 @@ If the workflow has succesfully ran, it will create a badge under `assets/badge.
 
 ## Disclaimer
 
-The one and only stats badge OG is @anuraghazra with his [github-readme-stats](https://github.com/anuraghazra/github-readme-stats) projects.
+The one and only stats badge OG is [@anuraghazra](https://github.com/anuraghazra) with his [github-readme-stats](https://github.com/anuraghazra/github-readme-stats) projects.

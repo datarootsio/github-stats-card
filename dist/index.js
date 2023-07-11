@@ -43597,6 +43597,10 @@ try {
     const excludeRepos = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('exclude_repos').split(',');
     const excludeReposOverride = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('exclude_repos_override').split(',');
     const stats = await (0,_collectStats__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)({ ghToken: ghTokenStats, username, excludeRepos, excludeReposOverride });
+    // eslint-disable-next-line no-console
+    console.log('Including stargazer stats from:');
+    // eslint-disable-next-line no-console
+    stats.stargazerDetails.forEach(repo => { console.log(`${repo.owner.login}/${repo.name}`); });
     const svgContent = await (0,_generateSvg__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z)({
         header,
         about,

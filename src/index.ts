@@ -15,6 +15,10 @@ try {
   const excludeReposOverride: string[] = core.getInput('exclude_repos_override').split(',')
 
   const stats = await collectStats({ ghToken: ghTokenStats, username, excludeRepos, excludeReposOverride })
+  // eslint-disable-next-line no-console
+  console.log('Including stargazer stats from:')
+  // eslint-disable-next-line no-console
+  stats.stargazerDetails.forEach(repo => { console.log(`${repo.owner.login}/${repo.name}`) })
 
   const svgContent = await generateSVG({
     header,
