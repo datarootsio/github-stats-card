@@ -7,7 +7,7 @@ Build 0)  -->
     <style type="text/css">
         .fadeInSlow {
             opacity: 0;
-            animation: fadeIn 2s;
+            animation: fadeIn 4s;
             animation-fill-mode: forwards;
             animation-delay: 0s;
         }

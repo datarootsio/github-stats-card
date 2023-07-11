@@ -49,6 +49,13 @@ If the workflow has succesfully ran, it will create a badge under `assets/badge.
 
 `exclude_repos_override`: [optional] comma separated list of repos to override from exclusion list (e.g. 'datarootsio' in exclude_repos and 'datarootsio/databooks' in exclude_repos_override will ONLY include databooks in stats)
 
-## Disclaimer
+## FAQ
 
-The one and only stats badge OG is [@anuraghazra](https://github.com/anuraghazra) with his [github-readme-stats](https://github.com/anuraghazra/github-readme-stats) projects.
+- *Which repositories count towards my stargazers count?*
+
+    Check out the logs of your action run. It will log which repositories are included after the exclude and override filters have been applied.
+
+- *How do I refresh the badge?*
+    
+    You probably want to look into the `schedule` [event trigger](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule). It allows you to use a cron-based schedule that allows you to for example refresh your badge daily.
+
