@@ -58,7 +58,8 @@ jobs:
         with:
           name: ${{ steps.extract-major.outputs.version }} 
           tag: ${{ steps.extract-major.outputs.version }}
-          allowUpdates: true
+          draft: false
+          omitDraftDuringUpdate: true
       - uses: ./
         name: github-stats-card
         with:
