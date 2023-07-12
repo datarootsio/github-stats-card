@@ -11,7 +11,7 @@ The badge generator set up to works as a GitHub action. You can add it to the GH
 
 
 ```yaml
-  - uses: bart6114/github-stats-card
+  - uses: datarootsio/github-stats-card
     name: github-stats-card
     with:
         username: bart6114
