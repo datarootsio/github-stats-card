@@ -54,6 +54,10 @@ jobs:
           delete_release: true
           tag_name: ${{ steps.extract-major.outputs.version }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: create tag
+        run: |
+          git tag -a ${{ steps.extract-major.outputs.version }} -m "version ${{ steps.extract-major.outputs.version }}"
+          git push origin ${{ steps.extract-major.outputs.version }}
       - name: also tag latest as vX (required by gh actions marketplace)
         uses: ncipollo/release-action@v1
         with:
