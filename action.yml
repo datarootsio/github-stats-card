@@ -1,6 +1,9 @@
 name: "github-stats-card"
 description: "Generate a minimal but inclusive github stats badge"
 author: Bart6114
+branding:
+  icon: 'award'
+  color: 'green'
 inputs:
   username:
     description: "username to get stats for"
