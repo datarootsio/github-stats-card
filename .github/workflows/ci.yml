@@ -51,6 +51,7 @@ jobs:
       - name: delete vX release before create new one
         uses: dev-drprasad/delete-tag-and-release@v1.0
         with:
+          delete_release: true
           tag_name: ${{ steps.extract-major.outputs.version }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: also tag latest as vX (required by gh actions marketplace)
@@ -58,6 +59,8 @@ jobs:
         with:
           name: ${{ steps.extract-major.outputs.version }} 
           tag: ${{ steps.extract-major.outputs.version }}
+          commit: ${{ steps.auto-commit-action.outputs.commit_hash }}
+          allowUpdates: true
           draft: false
           omitDraftDuringUpdate: true
       - uses: ./
