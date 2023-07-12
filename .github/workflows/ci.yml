@@ -44,7 +44,7 @@ jobs:
         id: extract-major
         run: |
           major_version=$(echo "${{ steps.tagger.outputs.new_tag }}" | cut -d '.' -f 1)
-          echo "::set-output name=version::${major_version}"
+          echo "version=${major_version}" >> $GITHUB_OUTPUT
       - name: diplay major version
         run: |
           echo "The major version is: ${{ steps.extract-major.outputs.version }}"
