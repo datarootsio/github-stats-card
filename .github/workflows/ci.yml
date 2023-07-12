@@ -40,6 +40,19 @@ jobs:
           WITH_V: true
           INITIAL_VERSION: 1.0.0
           DEFAULT_BUMP: patch
+      - name: extract major version
+        id: extract-major
+        run: |
+          major_version=$(echo "${{ steps.tagger.outputs.new_tag }}" | cut -d '.' -f 1)
+          echo "::set-output name=version::${major_version}"
+      - name: diplay major version
+        run: |
+          echo "The major version is: ${{ steps.extract-major.outputs.version }}"
+      - name: also tag latest as vX (required by gh actions marketplace)
+        uses: meeDamian/github-release@2.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ steps.extract-major.outputs.version }}
       - uses: ./
         name: github-stats-card
         with:
