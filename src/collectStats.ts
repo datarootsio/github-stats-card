@@ -67,7 +67,7 @@ const getUserStats = async (client: GraphQLClient, username: string): Promise<GH
     {
         user(login: "${username}") {
           avatarUrl
-          contributionsCollection(from: "2023-01-01T00:00:00") {
+          contributionsCollection {
             totalCommitContributions
             issueContributions {
               totalCount
