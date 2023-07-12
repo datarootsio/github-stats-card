@@ -38853,7 +38853,7 @@ const getUserStats = async (client, username) => {
     {
         user(login: "${username}") {
           avatarUrl
-          contributionsCollection(from: "2023-01-01T00:00:00") {
+          contributionsCollection {
             totalCommitContributions
             issueContributions {
               totalCount
