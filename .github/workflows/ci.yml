@@ -48,6 +48,11 @@ jobs:
       - name: diplay major version
         run: |
           echo "The major version is: ${{ steps.extract-major.outputs.version }}"
+      - name: delete vX release before create new one
+        uses: dev-drprasad/delete-tag-and-release@v1.0
+        with:
+          tag_name: ${{ steps.extract-major.outputs.version }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: also tag latest as vX (required by gh actions marketplace)
         uses: ncipollo/release-action@v1
         with:
