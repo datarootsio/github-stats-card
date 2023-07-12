@@ -51,6 +51,7 @@ jobs:
       - name: also tag latest as vX (required by gh actions marketplace)
         uses: ncipollo/release-action@v1
         with:
+          name: ${{ steps.extract-major.outputs.version }} 
           tag: ${{ steps.extract-major.outputs.version }}
           allowUpdates: true
       - uses: ./
