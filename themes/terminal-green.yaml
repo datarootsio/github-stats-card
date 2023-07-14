@@ -1,0 +1,22 @@
+header:
+  fontFamily: 'sans-serif'
+  fill: '#33FF33'
+  fontSize: '12px'
+
+about:
+  fontFamily: 'monospace'
+  fill: '#33FF33'
+  fontSize: '10px'
+
+username:
+  fontFamily: 'monospace'
+  fill: '#33FF33'
+  fontSize: '24px'
+
+stats:
+  fontFamily: 'monospace'
+  fill: '#33FF33'
+  fontSize: '12px'
+
+background:
+  fill: "#1C1C1C"

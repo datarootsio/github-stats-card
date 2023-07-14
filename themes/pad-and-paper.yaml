@@ -1,0 +1,31 @@
+header:
+  fontFamily: 'sans-serif'
+  fill: '#828282'
+  fontSize: '12px'
+
+about:
+  fontFamily: 'monospace'
+  fill: '#828282'
+  fontSize: '10px'
+
+username:
+  fontFamily: 'monospace'
+  fill: '#000000'
+  fontSize: '24px'
+
+stats:
+  fontFamily: 'monospace'
+  fill: '#000000'
+  fontSize: '12px'
+
+background:
+  fill: url(#grid)
+
+svg: | 
+    <path fill="white" d="M391.1,250H8.9C4,250,0,246,0,241.1V8.9C0,4,4,0,8.9,0h382.1c4.9,0,8.9,4,8.9,8.9v232.1
+        C400,246,396,250,391.1,250z" />
+    <defs>
+        <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse" x="10" y="10">
+            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="gray" stroke-width="0.5"/>
+        </pattern>
+    </defs>

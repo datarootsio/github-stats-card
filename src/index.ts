@@ -11,6 +11,7 @@ try {
   const commitMessage: string = core.getInput('commit_message')
   const header: string = core.getInput('header')
   const about: string = core.getInput('about')
+  const theme: string = core.getInput('theme')
   const excludeRepos: string[] = core.getInput('exclude_repos').split(',')
   const excludeReposOverride: string[] = core.getInput('exclude_repos_override').split(',')
 
@@ -21,6 +22,7 @@ try {
   stats.stargazerDetails.forEach(repo => { console.log(`${repo.owner.login}/${repo.name}`) })
 
   const svgContent = await generateSVG({
+    theme,
     header,
     about,
     stats,
