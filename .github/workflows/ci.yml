@@ -20,12 +20,10 @@ jobs:
         run: npm test
       - name: Rebuild the dist/ directory
         run: npm run prepare
-      - name: Cache dist
-        id: cache-dist
-        uses: actions/cache@v3
+      - uses: actions/upload-artifact@v3
         with:
+          name: dist-artifact
           path: dist/
-          key: dist
 
       
       # - name: commit dist to repo
@@ -84,16 +82,10 @@ jobs:
         - tropical-sunset
     steps:
       - uses: actions/checkout@v3
-      - name: restore cache dist
-        uses: actions/cache@v3
+      - uses: actions/download-artifact@v3
         with:
+          name: dist-artifact
           path: dist/
-          key: dist
-      - name: cache assets
-        uses: actions/cache@v3
-        with:
-          path: assets/
-          key: assets
       - uses: ./
         name: github-stats-card
         with:
@@ -105,6 +97,10 @@ jobs:
           exclude_repos: "datarootsio"
           exclude_repos_override: "datarootsio/cheek"
           theme: ${{ matrix.theme }}
+      - uses: actions/upload-artifact@v3
+        with:
+          name: badges-artifact
+          path: assets/
 
   commit-to-repo:
     needs: badges
@@ -115,16 +111,14 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v3
-      - name: restore cache dist
-        uses: actions/cache@v3
+      - uses: actions/download-artifact@v3
         with:
+          name: dist-artifact
           path: dist/
-          key: dist
-      - name: restore cache assets
-        uses: actions/cache@v3
+      - uses: actions/download-artifact@v3
         with:
+          name: badges-artifact
           path: assets/
-          key: assets
       - name: commit new files to repo
         uses: stefanzweifel/git-auto-commit-action@v4
       - name: Bump version and push tag
