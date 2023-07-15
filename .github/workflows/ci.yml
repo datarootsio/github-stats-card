@@ -124,7 +124,6 @@ jobs:
         with:
           path: assets/
           key: assets
-      - uses: actions/checkout@v3
       - name: commit new files to repo
         uses: stefanzweifel/git-auto-commit-action@v4
       - name: Bump version and push tag
