@@ -121,7 +121,7 @@ font-size:12px
             s-2-4.5-4.5-4.5l0,0c-2.5,0-4.5,2-4.5,4.5S22,169.3,24.5,169.3z" />
         </g>
 
-        <text transform="matrix(1 0 0 1 44.0453 170) translate(0, 25)">757 commits in last year</text>
+        <text transform="matrix(1 0 0 1 44.0453 170) translate(0, 25)">773 commits in last year</text>
     </g>
     <g class="fadeIn6 stats">
         <path transform="translate(0, 25)" d="M18.5,185.4c0-1.9,1.6-3.5,3.5-3.5c1.9,0,3.5,1.6,3.5,3.5c0,1-0.4,1.9-1.1,2.5c1.6,0.8,2.7,2.3,3,4.1
