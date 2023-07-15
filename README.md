@@ -57,7 +57,7 @@ Want to create your own themes? Check out the `themes/` folder, it rather straig
 
 `theme: neko-sleeps` 👇 
 
-![](assets/neko-sleeps.svg)
+![](assets/badge-neko-sleeps.svg)
 
 `theme: jimmy-goes-fishing` 👇 
 
