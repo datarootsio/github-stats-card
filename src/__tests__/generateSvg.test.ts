@@ -14,7 +14,7 @@ test('generateSVG', async () => {
   const stats = await collectStats({ ghToken, username: 'bart6114' })
   const svg = await generateSvg(
     {
-      theme: 'neko-sleeps',
+      theme: 'grainy-dreams',
       about: 'He/him, cheese, dad, data,\nrocks & trails.',
       stats,
       username: 'bart6114'

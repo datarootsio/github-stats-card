@@ -124,13 +124,15 @@ font-size:12px
         0 0 1 0 0
         0 0 0 19 -11"></feColorMatrix>
   </filter>
+  <clipPath id="rounded-clip">
+    <rect rx="15" width="100%" height="100%"/>
+  </clipPath>
 </defs>
 <g>
   <rect rx="15" width="100%" height="100%" fill="hsl(0, 100%, 60%)"></rect>
   <rect rx="15" width="100%" height="100%" fill="url(#gggrain-gradient3)"></rect>
   <rect rx="15" width="100%" height="100%" fill="url(#gggrain-gradient2)"></rect>
-  <rect rx="15" width="100%" height="100%" fill="transparent" filter="url(#gggrain-filter)" opacity="1"
-    style="mix-blend-mode: soft-light"></rect>
+    <rect width="100%" height="100%" fill="transparent" filter="url(#gggrain-filter)" opacity="1" style="mix-blend-mode: soft-light" clip-path="url(#rounded-clip)"></rect>
 </g>
 
 
