@@ -43606,21 +43606,24 @@ __nccwpck_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 /* harmony import */ var _createCommit__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(5969);
 /* harmony import */ var _collectStats__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(1950);
 /* harmony import */ var _generateSvg__WEBPACK_IMPORTED_MODULE_3__ = __nccwpck_require__(5567);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_4__ = __nccwpck_require__(1314);
+
 
 
 
 
 try {
-    const username = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('username');
     const ghTokenStats = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('gh_token_stats');
     const ghTokenCommits = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('gh_token_commits');
     const badgePath = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('badge_path');
-    const commitMessage = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('commit_message');
+    const username = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('username');
     const header = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('header');
     const about = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('about');
     const theme = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('theme');
     const excludeRepos = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('exclude_repos').split(',');
     const excludeReposOverride = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('exclude_repos_override').split(',');
+    const commitMessage = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('commit_message');
+    const commit = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getBooleanInput('commit');
     const stats = await (0,_collectStats__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)({ ghToken: ghTokenStats, username, excludeRepos, excludeReposOverride });
     // eslint-disable-next-line no-console
     console.log('Including stargazer stats from:');
@@ -43633,14 +43636,17 @@ try {
         stats,
         username
     });
-    const commitToken = ghTokenCommits === '' ? ghTokenStats : ghTokenCommits;
-    const c = {
-        ghToken: commitToken,
-        svgContent,
-        badgePath,
-        commitMessage
-    };
-    await (0,_createCommit__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z)(c);
+    if (commit) {
+        const commitToken = ghTokenCommits === '' ? ghTokenStats : ghTokenCommits;
+        const c = {
+            ghToken: commitToken,
+            svgContent,
+            badgePath,
+            commitMessage
+        };
+        await (0,_createCommit__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z)(c);
+    }
+    (0,_utils__WEBPACK_IMPORTED_MODULE_4__/* .checkDirAndWriteFile */ .o)(badgePath, svgContent);
     _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput('badgePath', badgePath);
 }
 catch (error) {
@@ -43650,6 +43656,34 @@ catch (error) {
 
 __webpack_async_result__();
 } catch(e) { __webpack_async_result__(e); } }, 1);
+
+/***/ }),
+
+/***/ 1314:
+/***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
+
+/* harmony export */ __nccwpck_require__.d(__webpack_exports__, {
+/* harmony export */   "o": () => (/* binding */ checkDirAndWriteFile)
+/* harmony export */ });
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(7147);
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nccwpck_require__.n(fs__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(1017);
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__nccwpck_require__.n(path__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function ensureDirSync(dir) {
+    if (fs__WEBPACK_IMPORTED_MODULE_0__.existsSync(dir)) {
+        return;
+    }
+    fs__WEBPACK_IMPORTED_MODULE_0__.mkdirSync(dir, { recursive: true });
+}
+function checkDirAndWriteFile(filePath, content) {
+    const dirname = path__WEBPACK_IMPORTED_MODULE_1__.dirname(filePath);
+    ensureDirSync(dirname);
+    fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync(filePath, content);
+}
+
+
 
 /***/ }),
 
