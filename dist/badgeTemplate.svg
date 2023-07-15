@@ -85,7 +85,7 @@
 
     </style>
 
-    {{ extraSvg }}
+    {{ extraSvgPre }}
 
     <path id="background" d="M391.1,250H8.9C4,250,0,246,0,241.1V8.9C0,4,4,0,8.9,0h382.1c4.9,0,8.9,4,8.9,8.9v232.1
         C400,246,396,250,391.1,250z" />
@@ -129,5 +129,7 @@
 
     <image class="fadeInSlow" x="306" y="30" width="64" height="64"
         xlink:href="data:image/jpeg;charset=utf-8;base64,{{avatar}}" alt="avatar" clip-path="inset(0% round 64px)" />
+
+    {{ extraSvgPre }}
 
 </svg>
