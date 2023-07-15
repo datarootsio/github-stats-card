@@ -26,6 +26,9 @@ inputs:
   commit_message:
     description: "commit message to use when pushing badge to repo"
     default: "Update badge"
+  commit: 
+    description: "whether to commit badge to repo (defaults to true))"
+    default: 'true'
   exclude_repos:
     description: "comma separated list of repos to exclude from stats, will do regex based matching (e.g. 'datarootsio' will match all repos in dataroots, 'datarootsio/databooks' will only match a single repo)"
     default: ""

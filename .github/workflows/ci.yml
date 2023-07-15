@@ -5,14 +5,6 @@ on: push
 jobs:
   base-ci:
     runs-on: ubuntu-latest
-    permissions:
-      # Give the default GITHUB_TOKEN write permission to commit and push the
-      # added or changed files to the repository.
-      contents: write
-    env: 
-      GITHUB_TOKEN_STATS: ${{ secrets.GH_TOKEN }}
-    outputs:
-      commit_hash: ${{ steps.auto-commit-action.outputs.commit_hash }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3.6.0
@@ -28,12 +20,117 @@ jobs:
         run: npm test
       - name: Rebuild the dist/ directory
         run: npm run prepare
-      - name: commit dist to repo
-        uses: stefanzweifel/git-auto-commit-action@v4
-        id: auto-commit-action
-      - uses: actions/checkout@v3
+      - name: Cache dist
+        id: cache-dist
+        uses: actions/cache@v3
         with:
-          ref: ${{ steps.auto-commit-action.outputs.commit_hash }}
+          path: dist/
+          key: dist
+
+      
+      # - name: commit dist to repo
+      #   uses: stefanzweifel/git-auto-commit-action@v4
+      #   id: auto-commit-action
+      # - uses: actions/checkout@v3
+      #   with:
+      #     ref: ${{ steps.auto-commit-action.outputs.commit_hash }}
+      # - name: Bump version and push tag
+      #   uses: anothrNick/github-tag-action@1.64.0 
+      #   id: tagger
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     WITH_V: true
+      #     INITIAL_VERSION: 1.0.0
+      #     DEFAULT_BUMP: patch
+      # - name: extract major version
+      #   id: extract-major
+      #   run: |
+      #     major_version=$(echo "${{ steps.tagger.outputs.new_tag }}" | cut -d '.' -f 1)
+      #     echo "version=${major_version}" >> $GITHUB_OUTPUT
+      # - name: diplay major version
+      #   run: |
+      #     echo "The major version is: ${{ steps.extract-major.outputs.version }}"
+      # - name: delete vX release before create new one
+      #   uses: dev-drprasad/delete-tag-and-release@v1.0
+      #   with:
+      #     delete_release: true
+      #     tag_name: ${{ steps.extract-major.outputs.version }}
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      # - name: move tag
+      #   uses: EndBug/latest-tag@latest
+      #   with:
+      #     ref: ${{ steps.extract-major.outputs.version }}
+      # - name: also tag latest as vX (required by gh actions marketplace)
+      #   if: github.ref == 'refs/heads/main'
+      #   uses: ncipollo/release-action@v1
+      #   with:
+      #     name: ${{ steps.extract-major.outputs.version }} 
+      #     tag: ${{ steps.extract-major.outputs.version }}
+      #     draft: false
+
+  badges:
+    needs: base-ci
+    runs-on: ubuntu-latest
+    env: 
+      GITHUB_TOKEN_STATS: ${{ secrets.GH_TOKEN }}
+    strategy:
+      matrix:
+        theme:
+        - dark
+        - cool-lake
+        - jimmy-goes-fishing
+        - retro-print
+        - terminal-green
+        - tropical-sunset
+    steps:
+      - uses: actions/checkout@v3
+      - name: restore cache dist
+        id: cache-dist
+        uses: actions/cache@v3
+        with:
+          path: dist/
+          key: dist
+      - name: cache assets
+        id: cache-dist
+        uses: actions/cache@v3
+        with:
+          path: assets/
+          key: assets
+      - uses: ./
+        name: github-stats-card
+        with:
+          username: bart6114
+          gh_token_stats: ${{ env.GITHUB_TOKEN_STATS }}
+          gh_token_commits: ${{ secrets.GITHUB_TOKEN }}
+          badge_path: assets/badge-${{ matrix.theme }}.svg
+          commit: "false"
+          exclude_repos: "datarootsio"
+          exclude_repos_override: "datarootsio/cheek"
+          theme: ${{ matrix.theme }}
+
+  commit-to-repo:
+    needs: badges
+    runs-on: ubuntu-latest
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the
+      # added or changed files to the repository.
+      contents: write
+    steps:
+      - name: restore cache dist
+        id: cache-dist
+        uses: actions/cache@v3
+        with:
+          path: dist/
+          key: dist
+      - name: restore cache assets
+        id: cache-dist
+        uses: actions/cache@v3
+        with:
+          path: assets/
+          key: assets
+      - uses: actions/checkout@v3
+      - name: commit new files to repo
+        uses: stefanzweifel/git-auto-commit-action@v4
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.64.0 
         id: tagger
@@ -50,54 +147,3 @@ jobs:
       - name: diplay major version
         run: |
           echo "The major version is: ${{ steps.extract-major.outputs.version }}"
-      - name: delete vX release before create new one
-        uses: dev-drprasad/delete-tag-and-release@v1.0
-        with:
-          delete_release: true
-          tag_name: ${{ steps.extract-major.outputs.version }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-      - name: move tag
-        uses: EndBug/latest-tag@latest
-        with:
-          ref: ${{ steps.extract-major.outputs.version }}
-      - name: also tag latest as vX (required by gh actions marketplace)
-        if: github.ref == 'refs/heads/main'
-        uses: ncipollo/release-action@v1
-        with:
-          name: ${{ steps.extract-major.outputs.version }} 
-          tag: ${{ steps.extract-major.outputs.version }}
-          draft: false
-
-  badges:
-    needs: base-ci
-    runs-on: ubuntu-latest
-    permissions:
-      # Give the default GITHUB_TOKEN write permission to commit and push the
-      # added or changed files to the repository.
-      contents: write
-    env: 
-      GITHUB_TOKEN_STATS: ${{ secrets.GH_TOKEN }}
-    strategy:
-      matrix:
-        theme:
-        - dark
-        - cool-lake
-        - jimmy-goes-fishing
-        - retro-print
-        - terminal-green
-        - tropical-sunset
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ needs.base-ci.outputs.commit_hash }}
-      - uses: ./
-        name: github-stats-card
-        with:
-          username: bart6114
-          gh_token_stats: ${{ env.GITHUB_TOKEN_STATS }}
-          gh_token_commits: ${{ secrets.GITHUB_TOKEN }}
-          badge_path: assets/badge-${{ matrix.theme }}.svg
-          commit_message: Badge generated by the treadmill bunnies.
-          exclude_repos: "datarootsio"
-          exclude_repos_override: "datarootsio/cheek"
-          theme: ${{ matrix.theme }}
