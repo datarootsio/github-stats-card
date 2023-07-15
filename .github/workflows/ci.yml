@@ -114,6 +114,7 @@ jobs:
       # added or changed files to the repository.
       contents: write
     steps:
+      - uses: actions/checkout@v3
       - name: restore cache dist
         uses: actions/cache@v3
         with:
