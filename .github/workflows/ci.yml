@@ -63,7 +63,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: badges-artifact
-          path: assets/
+          path: assets/badge-${{ matrix.theme }}.svg
 
   commit-to-repo:
     needs: badges
