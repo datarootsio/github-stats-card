@@ -85,13 +85,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: restore cache dist
-        id: cache-dist
         uses: actions/cache@v3
         with:
           path: dist/
           key: dist
       - name: cache assets
-        id: cache-dist
         uses: actions/cache@v3
         with:
           path: assets/
@@ -117,13 +115,11 @@ jobs:
       contents: write
     steps:
       - name: restore cache dist
-        id: cache-dist
         uses: actions/cache@v3
         with:
           path: dist/
           key: dist
       - name: restore cache assets
-        id: cache-dist
         uses: actions/cache@v3
         with:
           path: assets/
