@@ -14,13 +14,12 @@ test('generateSVG', async () => {
   const stats = await collectStats({ ghToken, username: 'bart6114' })
   const svg = await generateSvg(
     {
-      theme: 'pad-and-paper',
+      theme: 'grainy-dreams',
       about: 'He/him, cheese, dad, data,\nrocks & trails.',
       stats,
       username: 'bart6114'
     }
   )
-
   // for debugging purposes
   fs.writeFile('test_badge.svg', svg, err => {
     if (err != null) {

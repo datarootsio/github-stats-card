@@ -35,11 +35,14 @@ jobs:
         theme:
         - dark
         - cool-lake
+        - neko-sleeps
         - jimmy-goes-fishing
+        - pad-and-paper
         - retro-print
         - terminal-green
         - tropical-sunset
-        - pad-and-paper
+        - a-colibri-hums-while-the-dog-farts
+        - grainy-dreams
     steps:
       - uses: actions/checkout@v3
       - uses: actions/download-artifact@v3
@@ -60,7 +63,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: badges-artifact
-          path: assets/
+          path: assets/badge-${{ matrix.theme }}.svg
 
   commit-to-repo:
     needs: badges

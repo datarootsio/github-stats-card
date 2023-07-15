@@ -14,13 +14,19 @@ interface ThemeComponent {
   class: string
 }
 
+interface SVG {
+  [key: string]: string
+  pre: string
+  post: string
+}
+
 interface Theme {
   header: ThemeComponent
   about: ThemeComponent
   username: ThemeComponent
   background: ThemeComponent
   stats: ThemeComponent
-  svg: string
+  svg?: SVG
 }
 
 interface GenerateSVGOptions {
@@ -73,7 +79,8 @@ const generateSVG = async ({ theme = 'dark', username, about = '', header = "ðŸ‘
     aboutStyle: objToStyleString(t.about),
     statsStyle: objToStyleString(t.stats),
     backgroundStyle: objToStyleString(t.background),
-    extraSvg: t.svg,
+    extraSvgPre: t.svg?.pre !== undefined ? t.svg.pre : '',
+    extraSvgPost: t.svg?.post !== undefined ? t.svg.post : '',
     username,
     header,
     aboutWrap,

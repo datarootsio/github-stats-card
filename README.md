@@ -26,7 +26,7 @@ jobs:
       contents: write
     env: 
       GH_PAT: ${{ secrets.GH_PAT }}
-  - uses: datarootsio/github-stats-card
+  - uses: datarootsio/github-stats-card@v1
     name: github-stats-card
     with:
         username: bart6114
@@ -39,10 +39,53 @@ jobs:
         badge_path: "assets/badge.svg"
 ```
 
-If the workflow has succesfully ran, it will create a badge under `assets/badge.svg`. That you can then include in your readme via `![ain't it a beaut](assets/badge.svg)` (see below).
+If the workflow has succesfully ran, it will create a badge under `assets/badge.svg`. That you can then include in your readme via `![ain't it a beaut](assets/badge.svg)`.
 
-![ain't it a beaut](assets/badge-dark.svg)
+## Themes
 
+The following themes are available, see [configuration options](#configuration-options) on how to specify theme.
+
+Want to create your own themes? Check out the `themes/` folder, it rather straightforward. PRs are very much welcome! ❤️
+
+`theme: dark` 👇 (default theme)
+
+![](assets/badge-dark.svg)
+
+`theme: cool-lake` 👇 
+
+![](assets/badge-cool-lake.svg)
+
+`theme: neko-sleeps` 👇 
+
+![](assets/badge-neko-sleeps.svg)
+
+`theme: jimmy-goes-fishing` 👇 
+
+![](assets/badge-jimmy-goes-fishing.svg)
+
+`theme: pad-and-paper` 👇 
+
+![](assets/badge-pad-and-paper.svg)
+
+`theme: retro-print` 👇 
+
+![](assets/badge-retro-print.svg)
+
+`theme: terminal-green` 👇 
+
+![](assets/badge-terminal-green.svg)
+
+`theme: tropical-sunset` 👇 
+
+![](assets/badge-tropical-sunset.svg)
+
+`theme: a-colibri-hums-while-the-dog-farts` 👇 
+
+![](assets/badge-a-colibri-hums-while-the-dog-farts.svg)
+
+`theme: grainy-dreams` 👇 
+
+![](assets/badge-grainy-dreams.svg)
 
 ## Configuration options
 
@@ -66,45 +109,7 @@ If the workflow has succesfully ran, it will create a badge under `assets/badge.
 
 `exclude_repos_override`: [optional] comma separated list of repos to override from exclusion list (e.g. 'datarootsio' in exclude_repos and 'datarootsio/databooks' in exclude_repos_override will ONLY include databooks in stats)
 
-`theme`: [optional] one of `dark` (default), `cool-lake`, `jimmy-goes-fishing`, `pad-and-paper`, `retro-print`, `terminal-green`, `tropical-sunset`
-
-## Themes
-
-The following themes are available, see 'Configuration options' on how to specify theme.
-
-Want to create your own themes? Check out the `themes/` folder, it rather straightforward. PRs are very much welcome! ❤️
-
-`theme: dark` 👇 (default theme)
-
-![](assets/badge-dark.svg)
-
-`theme: cool-lake` 👇 
-
-![](assets/badge-cool-lake.svg)
-
-
-`theme: jimmy-goes-fishing` 👇 
-
-![](assets/badge-jimmy-goes-fishing.svg)
-
-`theme: pad-and-paper` 👇 
-
-![](assets/badge-pad-and-paper.svg)
-
-`theme: retro-print` 👇 
-
-![](assets/badge-retro-print.svg)
-
-`theme: terminal-green` 👇 
-
-![](assets/badge-terminal-green.svg)
-
-`theme: tropical-sunset` 👇 
-
-![](assets/badge-tropical-sunset.svg)
-
-
-
+`theme`: [optional] see [themes](#themes) for options
 
 ## FAQ
 
