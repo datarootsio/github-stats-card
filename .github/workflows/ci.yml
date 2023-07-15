@@ -105,6 +105,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           title: "${{ steps.tag.outputs.tag }}"
           automatic_release_tag: ${{ steps.tag.outputs.new_tag }}
+          prerelease: false
       - name: tag major if on main
         if: github.ref == 'refs/heads/main'
         run: |

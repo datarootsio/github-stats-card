@@ -41,7 +41,7 @@ jobs:
 
 If the workflow has succesfully ran, it will create a badge under `assets/badge.svg`. That you can then include in your readme via `![ain't it a beaut](assets/badge.svg)` (see below).
 
-![ain't it a beaut](assets/badge.svg)
+![ain't it a beaut](assets/badge-dark.svg)
 
 
 ## Configuration options
