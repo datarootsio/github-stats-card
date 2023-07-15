@@ -109,7 +109,7 @@ Want to create your own themes? Check out the `themes/` folder, it rather straig
 
 `exclude_repos_override`: [optional] comma separated list of repos to override from exclusion list (e.g. 'datarootsio' in exclude_repos and 'datarootsio/databooks' in exclude_repos_override will ONLY include databooks in stats)
 
-`theme`: [optional] one of `dark` (default), `cool-lake`, `jimmy-goes-fishing`, `pad-and-paper`, `retro-print`, `terminal-green`, `tropical-sunset`
+`theme`: [optional] see [themes](#themes) for options
 
 ## FAQ
 

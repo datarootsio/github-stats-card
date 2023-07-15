@@ -35,11 +35,14 @@ jobs:
         theme:
         - dark
         - cool-lake
+        - neko-sleeps
         - jimmy-goes-fishing
+        - pad-and-paper
         - retro-print
         - terminal-green
         - tropical-sunset
-        - pad-and-paper
+        - a-colibri-hums-while-the-dog-farts
+        - grainy-dreams
     steps:
       - uses: actions/checkout@v3
       - uses: actions/download-artifact@v3
