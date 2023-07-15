@@ -1,0 +1,22 @@
+header:
+  fontFamily: 'sans-serif'
+  fill: '#FF6347'    # Tomato
+  fontSize: '12px'
+
+about:
+  fontFamily: 'monospace'
+  fill: '#FF8C00'    # Dark Orange
+  fontSize: '10px'
+
+username:
+  fontFamily: 'monospace'
+  fill: '#008080'    # Teal
+  fontSize: '24px'
+
+stats:
+  fontFamily: 'monospace'
+  fill: '#20B2AA'    # Light Sea Green
+  fontSize: '12px'
+
+background:
+  fill: "#FAFAD2"    # Light Goldenrod Yellow

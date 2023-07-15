@@ -44,9 +44,7 @@ If the workflow has succesfully ran, it will create a badge under `assets/badge.
 ![ain't it a beaut](assets/badge.svg)
 
 
-## Settings
-
-`username`: your username
+## Configuration options
 
 `gh_token_stats`: token used for fetching user stats, typically a [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) (PAT) with access to your personal and organisation repos
 
@@ -54,15 +52,59 @@ If the workflow has succesfully ran, it will create a badge under `assets/badge.
 
 `badge_path`: [optional] path of badge svg (defaults to `assets/badge.svg`)
 
+`username`: your username
+
 `header`: [optional] header to use for badge (defaults to: `👋 hi i'm`)
 
 `about`: about me description to use for badge (use \n for newlines)
 
 `commit_message`: [optional] commit message to use (defaults to `Update badge`)
 
+`commit`: [optional] whether to commit badge to repo (defaults to `true`)
+
 `exclude_repos`: [optional] comma separated list of repos to exclude from stats, will do regex based matching (e.g. 'datarootsio' will match all repos in dataroots, 'datarootsio/databooks' will only match a single repo)
 
 `exclude_repos_override`: [optional] comma separated list of repos to override from exclusion list (e.g. 'datarootsio' in exclude_repos and 'datarootsio/databooks' in exclude_repos_override will ONLY include databooks in stats)
+
+`theme`: [optional] one of `dark` (default), `cool-lake`, `jimmy-goes-fishing`, `pad-and-paper`, `retro-print`, `terminal-green`, `tropical-sunset`
+
+## Themes
+
+The following themes are available, see 'Configuration options' on how to specify theme.
+
+Want to create your own themes? Check out the `themes/` folder, it rather straightforward. PRs are very much welcome! ❤️
+
+`theme: dark` 👇 (default theme)
+
+![](assets/badge-dark.svg)
+
+`theme: cool-lake` 👇 
+
+![](assets/badge-cool-lake.svg)
+
+
+`theme: jimmy-goes-fishing` 👇 
+
+![](assets/badge-jimmy-goes-fishing.svg)
+
+`theme: pad-and-paper` 👇 
+
+![](assets/badge-pad-and-paper.svg)
+
+`theme: retro-print` 👇 
+
+![](assets/badge-retro-print.svg)
+
+`theme: terminal-green` 👇 
+
+![](assets/badge-terminal-green.svg)
+
+`theme: tropical-sunset` 👇 
+
+![](assets/badge-tropical-sunset.svg)
+
+
+
 
 ## FAQ
 

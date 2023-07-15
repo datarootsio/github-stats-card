@@ -2,17 +2,24 @@ import * as core from '@actions/core'
 import createCommit, { type CommitOptions } from './createCommit'
 import collectStats from './collectStats'
 import generateSVG from './generateSvg'
+import { checkDirAndWriteFile } from './utils'
 
 try {
-  const username: string = core.getInput('username')
   const ghTokenStats: string = core.getInput('gh_token_stats')
   const ghTokenCommits: string = core.getInput('gh_token_commits')
+
   const badgePath: string = core.getInput('badge_path')
-  const commitMessage: string = core.getInput('commit_message')
+
+  const username: string = core.getInput('username')
   const header: string = core.getInput('header')
   const about: string = core.getInput('about')
+  const theme: string = core.getInput('theme')
+
   const excludeRepos: string[] = core.getInput('exclude_repos').split(',')
   const excludeReposOverride: string[] = core.getInput('exclude_repos_override').split(',')
+
+  const commitMessage: string = core.getInput('commit_message')
+  const commit: boolean = core.getBooleanInput('commit')
 
   const stats = await collectStats({ ghToken: ghTokenStats, username, excludeRepos, excludeReposOverride })
   // eslint-disable-next-line no-console
@@ -21,22 +28,27 @@ try {
   stats.stargazerDetails.forEach(repo => { console.log(`${repo.owner.login}/${repo.name}`) })
 
   const svgContent = await generateSVG({
+    theme,
     header,
     about,
     stats,
     username
   })
 
-  const commitToken = ghTokenCommits === '' ? ghTokenStats : ghTokenCommits
+  if (commit) {
+    const commitToken = ghTokenCommits === '' ? ghTokenStats : ghTokenCommits
 
-  const c: CommitOptions = {
-    ghToken: commitToken,
-    svgContent,
-    badgePath,
-    commitMessage
+    const c: CommitOptions = {
+      ghToken: commitToken,
+      svgContent,
+      badgePath,
+      commitMessage
+    }
+
+    await createCommit(c)
   }
 
-  await createCommit(c)
+  checkDirAndWriteFile(badgePath, svgContent)
   core.setOutput('badgePath', badgePath)
 } catch (error) {
   if (error instanceof Error) core.setFailed(error.message)
