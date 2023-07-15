@@ -83,6 +83,9 @@ Want to create your own themes? Check out the `themes/` folder, it rather straig
 
 ![](assets/badge-a-colibri-hums-while-the-dog-farts.svg)
 
+`theme: grainy-dreams` 👇 
+
+![](assets/badge-grainy-dreams.svg)
 
 ## Configuration options
 

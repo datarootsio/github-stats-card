@@ -130,6 +130,5 @@
     <image class="fadeInSlow" x="306" y="30" width="64" height="64"
         xlink:href="data:image/jpeg;charset=utf-8;base64,{{avatar}}" alt="avatar" clip-path="inset(0% round 64px)" />
 
-    {{ extraSvgPre }}
-
+    {{ extraSvgPost }}
 </svg>
