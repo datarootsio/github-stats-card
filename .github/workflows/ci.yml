@@ -25,47 +25,6 @@ jobs:
           name: dist-artifact
           path: dist/
 
-      
-      # - name: commit dist to repo
-      #   uses: stefanzweifel/git-auto-commit-action@v4
-      #   id: auto-commit-action
-      # - uses: actions/checkout@v3
-      #   with:
-      #     ref: ${{ steps.auto-commit-action.outputs.commit_hash }}
-      # - name: Bump version and push tag
-      #   uses: anothrNick/github-tag-action@1.64.0 
-      #   id: tagger
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     WITH_V: true
-      #     INITIAL_VERSION: 1.0.0
-      #     DEFAULT_BUMP: patch
-      # - name: extract major version
-      #   id: extract-major
-      #   run: |
-      #     major_version=$(echo "${{ steps.tagger.outputs.new_tag }}" | cut -d '.' -f 1)
-      #     echo "version=${major_version}" >> $GITHUB_OUTPUT
-      # - name: diplay major version
-      #   run: |
-      #     echo "The major version is: ${{ steps.extract-major.outputs.version }}"
-      # - name: delete vX release before create new one
-      #   uses: dev-drprasad/delete-tag-and-release@v1.0
-      #   with:
-      #     delete_release: true
-      #     tag_name: ${{ steps.extract-major.outputs.version }}
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      # - name: move tag
-      #   uses: EndBug/latest-tag@latest
-      #   with:
-      #     ref: ${{ steps.extract-major.outputs.version }}
-      # - name: also tag latest as vX (required by gh actions marketplace)
-      #   if: github.ref == 'refs/heads/main'
-      #   uses: ncipollo/release-action@v1
-      #   with:
-      #     name: ${{ steps.extract-major.outputs.version }} 
-      #     tag: ${{ steps.extract-major.outputs.version }}
-      #     draft: false
-
   badges:
     needs: base-ci
     runs-on: ubuntu-latest
@@ -124,7 +83,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.64.0 
-        id: tagger
+        id: tag
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
@@ -133,11 +92,19 @@ jobs:
       - name: extract major version
         id: extract-major
         run: |
-          major_version=$(echo "${{ steps.tagger.outputs.new_tag }}" | cut -d '.' -f 1)
+          major_version=$(echo "${{ steps.tag.outputs.new_tag }}" | cut -d '.' -f 1)
           echo "version=${major_version}" >> $GITHUB_OUTPUT
       - name: diplay major version
         run: |
           echo "The major version is: ${{ steps.extract-major.outputs.version }}"
+      - name: automatic-draft-release
+        if: github.ref == 'refs/heads/main'
+        uses: marvinpinto/action-automatic-releases@v1.2.1
+        with:
+          draft: false
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          title: "${{ steps.tag.outputs.tag }}"
+          automatic_release_tag: ${{ steps.tag.outputs.new_tag }}
       - name: tag major if on main
         if: github.ref == 'refs/heads/main'
         run: |
