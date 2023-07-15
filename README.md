@@ -26,7 +26,7 @@ jobs:
       contents: write
     env: 
       GH_PAT: ${{ secrets.GH_PAT }}
-  - uses: datarootsio/github-stats-card
+  - uses: datarootsio/github-stats-card@v1
     name: github-stats-card
     with:
         username: bart6114
