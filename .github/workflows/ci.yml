@@ -138,3 +138,8 @@ jobs:
       - name: diplay major version
         run: |
           echo "The major version is: ${{ steps.extract-major.outputs.version }}"
+      - name: tag major if on main
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git tag -f "${{ steps.extract-major.outputs.version }}"
+          git push -f origin "${{ steps.extract-major.outputs.version }}"
