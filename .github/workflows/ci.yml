@@ -80,6 +80,7 @@ jobs:
         - retro-print
         - terminal-green
         - tropical-sunset
+        - pad-and-paper
     steps:
       - uses: actions/checkout@v3
       - uses: actions/download-artifact@v3
