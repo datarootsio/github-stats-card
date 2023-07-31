@@ -117,7 +117,7 @@ font-size:12px
         c-0.1,0.2-0.3,0.4-0.6,0.4l-3.1,0.4l2.2,2.2c0.2,0.2,0.3,0.4,0.2,0.7l-0.5,3.1l2.8-1.5c0.2-0.1,0.5-0.1,0.7,0l2.8,1.5l-0.5-3.1
         c0-0.2,0-0.5,0.2-0.7l2.2-2.2l-3.1-0.4c-0.2,0-0.5-0.2-0.6-0.4L24.5,137.5L24.5,137.5z" />
 
-        <text transform="matrix(1 0 0 1 44.0453 147) translate(0, 25)">752 stars contributed to</text>
+        <text transform="matrix(1 0 0 1 44.0453 147) translate(0, 25)">754 stars contributed to</text>
     </g>
     <g class="fadeIn5 stats">
         <g transform="translate(0, 25)">
@@ -128,7 +128,7 @@ font-size:12px
             s-2-4.5-4.5-4.5l0,0c-2.5,0-4.5,2-4.5,4.5S22,169.3,24.5,169.3z" />
         </g>
 
-        <text transform="matrix(1 0 0 1 44.0453 170) translate(0, 25)">794 commits in last year</text>
+        <text transform="matrix(1 0 0 1 44.0453 170) translate(0, 25)">734 commits in last year</text>
     </g>
     <g class="fadeIn6 stats">
         <path transform="translate(0, 25)" d="M18.5,185.4c0-1.9,1.6-3.5,3.5-3.5c1.9,0,3.5,1.6,3.5,3.5c0,1-0.4,1.9-1.1,2.5c1.6,0.8,2.7,2.3,3,4.1
