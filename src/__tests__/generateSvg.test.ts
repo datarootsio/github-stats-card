@@ -11,13 +11,14 @@ if (process.env.GITHUB_TOKEN === undefined) {
 const ghToken = process.env.GITHUB_TOKEN
 
 test('generateSVG', async () => {
-  const stats = await collectStats({ ghToken, username: 'bart6114' })
+  const username = 'murilo-cunha'
+  const stats = await collectStats({ ghToken, username })
   const svg = await generateSvg(
     {
       theme: 'hypnotoad',
-      about: 'He/him, cheese, dad, data,\nrocks & trails.',
+      about: 'Dad of two doggos, beautiful Brazilian,\nand a software engineer',
       stats,
-      username: 'bart6114'
+      username
     }
   )
   // for debugging purposes
@@ -33,9 +34,6 @@ test('generateSVG', async () => {
   const svgDoc: object = parser.parse(svg)
   expect(svgDoc).toBeDefined()
   expect(svgDoc).toBeInstanceOf(Object)
-
-  // eslint-disable-next-line
-  console.log(svg) 
 }, 10000)
 
 test('templater', () => {

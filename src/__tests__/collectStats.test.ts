@@ -21,6 +21,12 @@ test('collectStats', async () => {
 
   // expect stargazers to be more than 1000
   expect(stats.stargazers).toBeGreaterThan(1000)
+
+  // had a bug where stats were based on pat and not specified user
+  const statsMurillo = await collectStats({ ghToken, username: 'murilo-cunha' })
+  expect(statsMurillo.followers).not.toBe(stats.followers)
+  expect(statsMurillo.stargazers).not.toBe(stats.stargazers)
+  expect(statsMurillo.commits).not.toBe(stats.commits)
 }, 10000)
 
 test('collectStatsWithFilter', async () => {
