@@ -87,6 +87,11 @@ Want to create your own themes? Check out the `themes/` folder, it rather straig
 
 ![](assets/badge-grainy-dreams.svg)
 
+`theme: hypnotoad` 👇 
+
+![](assets/badge-hypnotoad.svg)
+
+
 ## Configuration options
 
 `gh_token_stats`: token used for fetching user stats, typically a [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) (PAT) with access to your personal and organisation repos

@@ -41,6 +41,7 @@ jobs:
         - retro-print
         - terminal-green
         - tropical-sunset
+        - hypnotoad
         - a-colibri-hums-while-the-dog-farts
         - grainy-dreams
     steps:
