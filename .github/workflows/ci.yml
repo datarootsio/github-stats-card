@@ -53,14 +53,14 @@ jobs:
       - uses: ./
         name: github-stats-card
         with:
-          username: bart6114
+          username: murilo-cunha
           gh_token_stats: ${{ env.GITHUB_TOKEN_STATS }}
           gh_token_commits: ${{ secrets.GITHUB_TOKEN }}
           badge_path: assets/badge-${{ matrix.theme }}.svg
           commit: "false"
-          exclude_repos: "datarootsio"
-          exclude_repos_override: "datarootsio/cheek"
           theme: ${{ matrix.theme }}
+          about: "Rust evangelist by day, dog whisperer by night,\nliving life between compile and fetch."
+
       - uses: actions/upload-artifact@v3
         with:
           name: badges-artifact

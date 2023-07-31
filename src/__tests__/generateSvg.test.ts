@@ -16,7 +16,7 @@ test('generateSVG', async () => {
   const svg = await generateSvg(
     {
       theme: 'hypnotoad',
-      about: 'Dad of two doggos, beautiful Brazilian,\nand a software engineer',
+      about: 'Rust evangelist by day, dog whisperer by night,\nliving life between compile and fetch.',
       stats,
       username
     }
