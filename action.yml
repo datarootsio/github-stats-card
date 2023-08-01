@@ -1,6 +1,9 @@
 name: "github-stats-card"
 description: "Generate a minimal but inclusive github stats badge"
 author: Bart6114
+branding:
+  icon: 'award'
+  color: 'green'
 inputs:
   username:
     description: "username to get stats for"
@@ -12,6 +15,9 @@ inputs:
   about:
     description: "about me description to use for badge (use \n for newlines)"
     default: "Loves goblins, despises gnomes.\nEnjoys candlelit custard pudding."
+  theme: 
+    description: "theme to use for badge"
+    default: "dark"
   gh_token_stats:
     description: "github token to use to fetch user stats"
     required: true
@@ -23,6 +29,9 @@ inputs:
   commit_message:
     description: "commit message to use when pushing badge to repo"
     default: "Update badge"
+  commit: 
+    description: "whether to commit badge to repo (defaults to true)"
+    default: 'true'
   exclude_repos:
     description: "comma separated list of repos to exclude from stats, will do regex based matching (e.g. 'datarootsio' will match all repos in dataroots, 'datarootsio/databooks' will only match a single repo)"
     default: ""

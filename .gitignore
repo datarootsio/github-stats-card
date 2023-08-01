@@ -131,3 +131,4 @@ out
 test*.svg
 wip*.svg
 .DS_Store
+*.sh

@@ -21,7 +21,8 @@
     "axios": "^1.4.0",
     "dotenv": "^16.3.1",
     "fast-xml-parser": "^4.2.5",
-    "graphql-request": "^6.1.0"
+    "graphql-request": "^6.1.0",
+    "yaml": "^2.3.1"
   },
   "devDependencies": {
     "@types/jest": "^29.5.3",
