@@ -132,7 +132,7 @@ font-size:12px
         c-0.4,0-0.8-0.3-0.8-0.8S27.1,183.9,27.5,183.9z M22,183.4c-1.1,0-2,0.8-2,2s0.8,2,2,2c0,0,0.1,0,0.1,0c1.1,0,2-0.9,2-2
         C24,184.3,23.1,183.5,22,183.4z" />
 
-        <text transform="matrix(1 0 0 1 44.0453 193) translate(0, 25)">24 followers</text>
+        <text transform="matrix(1 0 0 1 44.0453 193) translate(0, 25)">25 followers</text>
     </g>
 
     <image class="fadeInSlow" x="306" y="30" width="64" height="64"
